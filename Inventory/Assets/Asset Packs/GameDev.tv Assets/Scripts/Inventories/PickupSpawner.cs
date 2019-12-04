@@ -17,18 +17,14 @@ namespace RPG.Inventories
             SpawnPickup();
         }
 
-        public void CaptureState(IDictionary<string, object> state)
+        public object CaptureState()
         {
-            state["wasCollected"] = isCollected;
+            return isCollected;
         }
 
-        public void RestoreState(IReadOnlyDictionary<string, object> state)
+        public void RestoreState(object state)
         {
-            bool shouldBeCollected = false;
-            if (state.ContainsKey("wasCollected"))
-            {
-                shouldBeCollected = (bool)state["wasCollected"];
-            }
+            bool shouldBeCollected = (bool)state;
 
             if (shouldBeCollected && !isCollected)
             {

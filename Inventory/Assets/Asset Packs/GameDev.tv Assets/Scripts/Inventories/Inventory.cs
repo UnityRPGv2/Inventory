@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Saving;
-using RPG.Core.UI.Dragging;
 
 namespace RPG.Inventories
 {
-    public class Inventory : MonoBehaviour, ISaveable, IDiscardHandler<InventoryItem>
+    public class Inventory : MonoBehaviour, ISaveable
     {
 
         int coin;
@@ -105,12 +104,6 @@ namespace RPG.Inventories
             return slots[slot].item;
         }
 
-        public void CaptureState(IDictionary<string, object> state)
-        {
-            CaptureInventoryState(state);
-            CaptureDropState(state);
-        }
-
         private void CaptureInventoryState(IDictionary<string, object> state)
         {
             var slotStrings = new string[inventorySize];
@@ -132,7 +125,7 @@ namespace RPG.Inventories
             {
                 droppedItemsList[i] = new Dictionary<string, object>();
                 droppedItemsList[i]["itemID"] = droppedItems[i].item.itemID;
-                droppedItemsList[i]["position"] = (SerializableVector3)droppedItems[i].transform.position;
+                droppedItemsList[i]["position"] = new SerializableVector3(droppedItems[i].transform.position);
             }
             state["droppedItems"] = droppedItemsList;
         }
@@ -148,24 +141,6 @@ namespace RPG.Inventories
                 }
             }
             droppedItems = newList;
-        }
-
-        public void RestoreState(IReadOnlyDictionary<string, object> state)
-        {
-            RestoreInventory(state);
-            inventoryUpdated();
-
-            DeleteAllDrops();
-            if (state.ContainsKey("droppedItems"))
-            {
-                var droppedItemsList = (Dictionary<string, object>[])state["droppedItems"];
-                foreach (var item in droppedItemsList)
-                {
-                    var pickupItem = InventoryItem.GetFromID((string)item["itemID"]);
-                    Vector3 position = (SerializableVector3)item["position"];
-                    SpawnPickup(pickupItem, position);
-                }
-            }
         }
 
         private void DeleteAllDrops()
@@ -202,5 +177,31 @@ namespace RPG.Inventories
             return hasDeliveryItem;
         }
 
+        public object CaptureState()
+        {
+            Dictionary<string, object> state = new Dictionary<string, object>();
+            CaptureInventoryState(state);
+            CaptureDropState(state);
+            return state;
+        }
+
+        public void RestoreState(object state)
+        {
+            Dictionary<string, object> stateDict = (Dictionary<string, object>) state;
+            RestoreInventory(stateDict);
+            inventoryUpdated();
+
+            DeleteAllDrops();
+            if (stateDict.ContainsKey("droppedItems"))
+            {
+                var droppedItemsList = (Dictionary<string, object>[])stateDict["droppedItems"];
+                foreach (var item in droppedItemsList)
+                {
+                    var pickupItem = InventoryItem.GetFromID((string)item["itemID"]);
+                    Vector3 position = ((SerializableVector3)item["position"]).ToVector();
+                    SpawnPickup(pickupItem, position);
+                }
+            }
+        }
     }
 }

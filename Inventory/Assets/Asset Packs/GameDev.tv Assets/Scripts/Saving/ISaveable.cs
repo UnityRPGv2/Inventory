@@ -1,4 +1,4 @@
-namespace InventoryExample.Saving
+namespace GameDevTV.Saving
 {
     public interface ISaveable
     {

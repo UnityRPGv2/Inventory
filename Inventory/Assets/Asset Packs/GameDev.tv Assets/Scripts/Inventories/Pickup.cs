@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Saving;
-using RPG.Control;
+using InventoryExample.Control;
 
 namespace RPG.Inventories
 {
@@ -21,7 +21,12 @@ namespace RPG.Inventories
             }
         }
 
-        bool IRaycastable.HandleRaycast(PlayerControl playerControl)
+        public CursorType GetCursorType()
+        {
+            return CursorType.Pickup;
+        }
+
+        public bool HandleRaycast(PlayerController callingController)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -31,9 +36,5 @@ namespace RPG.Inventories
         }
 
         public InventoryItem item { get { return _item; } set { _item = value; } }
-
-        int IRaycastable.priority => 2;
-
-        CursorType IRaycastable.cursor => CursorType.Pickup;
     }
 }

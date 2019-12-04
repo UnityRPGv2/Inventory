@@ -2,11 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Saving;
-using RPG.Stats;
 
 namespace RPG.Inventories
 {
-    public class Equipment : MonoBehaviour, ISaveable, IStatModifiersProvider
+    public class Equipment : MonoBehaviour, ISaveable
     {
         Dictionary<EquipableItem.EquipLocation, EquipableItem> equippedItems = new Dictionary<EquipableItem.EquipLocation, EquipableItem>();
 
@@ -38,50 +37,30 @@ namespace RPG.Inventories
             return replacedItem;
         }
 
-        public IEnumerable<StatModifier> GetModifiers(StatModifier.Filter filter)
-        {
-            foreach (var pair in equippedItems)
-            {
-                if (pair.Value == null) continue;
-                    
-                foreach (var modifier in pair.Value.modifiers)
-                {
-                    if (modifier.Matches(filter))
-                    {
-                        yield return modifier;
-                    }
-                }
-            }
-        }
-
-        public void CaptureState(IDictionary<string, object> state)
+        public object CaptureState()
         {
             var equippedItemsForSerialization = new Dictionary<EquipableItem.EquipLocation, string>();
             foreach (var pair in equippedItems)
             {
                 equippedItemsForSerialization[pair.Key] = pair.Value.itemID;
             }
-            state["equippedItems"] = equippedItemsForSerialization;
+            return equippedItemsForSerialization;
         }
 
-
-        public void RestoreState(IReadOnlyDictionary<string, object> state)
+        public void RestoreState(object state)
         {
             equippedItems = new Dictionary<EquipableItem.EquipLocation, EquipableItem>();
 
-            if (!state.ContainsKey("equippedItems")) return;
-
-            var equippedItemsForSerialization = (Dictionary<EquipableItem.EquipLocation, string>)state["equippedItems"];
+            var equippedItemsForSerialization = (Dictionary<EquipableItem.EquipLocation, string>)state;
 
             foreach (var pair in equippedItemsForSerialization)
             {
-                var item =(EquipableItem)InventoryItem.GetFromID(pair.Value);
+                var item = (EquipableItem)InventoryItem.GetFromID(pair.Value);
                 if (item != null)
                 {
                     equippedItems[pair.Key] = item;
                 }
             }
-
         }
     }
 }
