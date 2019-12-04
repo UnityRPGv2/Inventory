@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using InventoryExample.Combat;
 using InventoryExample.Core;
 using InventoryExample.Movement;
 using UnityEngine;
-using InventoryExample.Attributes;
 using GameDevTV.Utils;
 
 namespace InventoryExample.Control
@@ -22,8 +20,6 @@ namespace InventoryExample.Control
         [SerializeField] float patrolSpeedFraction = 0.2f;
         [SerializeField] float shoutDistance = 5f;
 
-        Fighter fighter;
-        Health health;
         Mover mover;
         GameObject player;
 
@@ -34,8 +30,6 @@ namespace InventoryExample.Control
         int currentWaypointIndex = 0;
 
         private void Awake() {
-            fighter = GetComponent<Fighter>();
-            health = GetComponent<Health>();
             mover = GetComponent<Mover>();
             player = GameObject.FindWithTag("Player");
 
@@ -53,13 +47,7 @@ namespace InventoryExample.Control
 
         private void Update()
         {
-            if (health.IsDead()) return;
-
-            if (IsAggrevated() && fighter.CanAttack(player))
-            {
-                AttackBehaviour();
-            }
-            else if (timeSinceLastSawPlayer < suspicionTime)
+            if (timeSinceLastSawPlayer < suspicionTime)
             {
                 SuspicionBehaviour();
             }
@@ -127,7 +115,6 @@ namespace InventoryExample.Control
         private void AttackBehaviour()
         {
             timeSinceLastSawPlayer = 0;
-            fighter.Attack(player);
 
             AggrevateNearbyEnemies();
         }

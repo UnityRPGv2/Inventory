@@ -1,7 +1,5 @@
-using InventoryExample.Combat;
 using InventoryExample.Movement;
 using UnityEngine;
-using InventoryExample.Attributes;
 using System;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
@@ -10,8 +8,6 @@ namespace InventoryExample.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        Health health;
-
         [System.Serializable]
         struct CursorMapping
         {
@@ -24,19 +20,9 @@ namespace InventoryExample.Control
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
         [SerializeField] float raycastRadius = 1f;
 
-        private void Awake() {
-            health = GetComponent<Health>();
-        }
-
         private void Update()
         {
             if (InteractWithUI()) return;
-            if (health.IsDead()) 
-            {
-                SetCursor(CursorType.None);
-                return;
-            }
-
             if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
 
