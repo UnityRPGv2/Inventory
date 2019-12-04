@@ -7,7 +7,7 @@ using System.Text;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace InventoryExample.Saving
+namespace GameDevTV.Saving
 {
     public class SavingSystem : MonoBehaviour
     {
