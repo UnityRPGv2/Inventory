@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using RPG.Combat;
-using RPG.Core;
-using RPG.Movement;
+using InventoryExample.Combat;
+using InventoryExample.Core;
+using InventoryExample.Movement;
 using UnityEngine;
-using RPG.Attributes;
+using InventoryExample.Attributes;
 using GameDevTV.Utils;
 
-namespace RPG.Control
+namespace InventoryExample.Control
 {
     public class AIController : MonoBehaviour
     {

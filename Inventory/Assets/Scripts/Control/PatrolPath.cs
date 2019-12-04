@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Control
+namespace InventoryExample.Control
 {
     public class PatrolPath : MonoBehaviour
     {

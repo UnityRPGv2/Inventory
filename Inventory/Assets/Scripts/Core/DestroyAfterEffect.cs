@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Core
+namespace InventoryExample.Core
 {
     public class DestroyAfterEffect : MonoBehaviour
     {

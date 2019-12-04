@@ -1,4 +1,4 @@
-namespace RPG.Saving
+namespace InventoryExample.Saving
 {
     public interface ISaveable
     {

@@ -1,4 +1,4 @@
-namespace RPG.Core
+namespace InventoryExample.Core
 {
     public interface IAction {
         void Cancel();

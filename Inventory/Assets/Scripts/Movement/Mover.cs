@@ -1,10 +1,10 @@
-﻿using RPG.Core;
-using RPG.Saving;
+﻿using InventoryExample.Core;
+using InventoryExample.Saving;
 using UnityEngine;
 using UnityEngine.AI;
-using RPG.Attributes;
+using InventoryExample.Attributes;
 
-namespace RPG.Movement
+namespace InventoryExample.Movement
 {
     public class Mover : MonoBehaviour, IAction, ISaveable
     {

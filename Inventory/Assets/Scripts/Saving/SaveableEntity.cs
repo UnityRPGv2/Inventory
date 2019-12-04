@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using RPG.Core;
+using InventoryExample.Core;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace RPG.Saving
+namespace InventoryExample.Saving
 {
     [ExecuteAlways]
     public class SaveableEntity : MonoBehaviour

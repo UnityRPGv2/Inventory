@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RPG.Core
+namespace InventoryExample.Core
 {
     public class ActionScheduler : MonoBehaviour
     {
