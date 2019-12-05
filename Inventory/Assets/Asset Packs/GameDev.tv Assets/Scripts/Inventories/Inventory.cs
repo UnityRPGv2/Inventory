@@ -29,8 +29,8 @@ namespace RPG.Inventories
 
         private void Awake() {
             slots = new InventorySlot[inventorySize];
-            // slots[0].item = InventoryItem.GetFromID("ba374279-da85-4530-8052-4c10a8ce03b5");
-            // slots[3].item = InventoryItem.GetFromID("bedb2849-78fb-4167-af74-96612a5b5229");
+            slots[0].item = InventoryItem.GetFromID("ba374279-da85-4530-8052-4c10a8ce03b5");
+            slots[3].item = InventoryItem.GetFromID("bedb2849-78fb-4167-af74-96612a5b5229");
         }
 
         public event Action inventoryUpdated = delegate {};
