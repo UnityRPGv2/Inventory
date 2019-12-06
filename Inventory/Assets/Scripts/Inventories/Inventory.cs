@@ -36,15 +36,7 @@ namespace RPG.Inventories
 
         public bool AddToFirstEmptySlot(InventoryItem item)
         {
-            for (int i = 0; i < slots.Length; i++)
-            {
-                if (object.ReferenceEquals(slots[i].item, item))
-                {
-                    slots[i].number++;
-                    inventoryUpdated();
-                    return true;
-                }
-            }
+            if (AttemptToStack(item)) return true;
 
             for (int i = 0; i < slots.Length; i++)
             {
@@ -93,6 +85,25 @@ namespace RPG.Inventories
             {
                 if (object.ReferenceEquals(slots[i].item, consumeItem))
                 {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private bool AttemptToStack(InventoryItem item)
+        {
+            if (!item.isStackable)
+            {
+                return false;
+            }
+
+            for (int i = 0; i < slots.Length; i++)
+            {
+                if (object.ReferenceEquals(slots[i].item, item))
+                {
+                    slots[i].number++;
+                    inventoryUpdated();
                     return true;
                 }
             }

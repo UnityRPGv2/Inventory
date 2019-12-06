@@ -25,6 +25,7 @@ namespace RPG.Inventories
         [SerializeField] string _description;
         [SerializeField] Sprite _icon;
         [SerializeField] GameObject _pickup;
+        [SerializeField] bool _stackable = false;
 
         static Dictionary<string, InventoryItem> itemLookupCache;
 
@@ -54,6 +55,7 @@ namespace RPG.Inventories
         public Sprite icon => _icon;
         public string displayName => _displayName;
         public string description => _description;
+        public bool isStackable => _stackable;
 
         public Pickup SpawnPickup(Vector3 position)
         {

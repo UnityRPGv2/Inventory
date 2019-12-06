@@ -20,4 +20,5 @@ MonoBehaviour:
   _description: The hat of your dreams, keeps rain of the head.
   _icon: {fileID: 21300000, guid: c1b61b3a91732a747a8496fc75a13fe2, type: 3}
   _pickup: {fileID: 1222577395524571727, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
+  _stackable: 1
   _allowedEquipLocation: 0

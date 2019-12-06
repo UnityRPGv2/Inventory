@@ -30,7 +30,7 @@ public class InventoryItemIcon : MonoBehaviour
 
         if (_itemNumber)
         {
-            if (number <= 0)
+            if (number <= 1)
             {
                 _textContainer.SetActive(false);
             }
