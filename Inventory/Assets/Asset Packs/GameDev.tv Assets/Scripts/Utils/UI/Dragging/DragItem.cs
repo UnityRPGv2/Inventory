@@ -100,15 +100,60 @@ namespace RPG.Core.UI.Dragging
 
             print("destinationMaxAcceptable " + destinationMaxAcceptable + " removedSourceNumber " + removedSourceNumber + " sourceMaxAcceptable " + sourceMaxAcceptable + " removedDestinationNumber " + removedDestinationNumber);
 
-            if (destinationMaxAcceptable < removedSourceNumber || sourceMaxAcceptable < removedDestinationNumber)
+            var sourceTakeBackNumber = 0;
+
+            if (destinationMaxAcceptable < removedSourceNumber)
             {
-                sourceDestination.AddItems(removedSourceItem, removedSourceNumber);
-                destination.AddItems(removedDestinationItem, removedDestinationNumber);
+                sourceTakeBackNumber = removedSourceNumber - destinationMaxAcceptable;
+
+                var sourceTakeBackAcceptable = sourceDestination.MaxAcceptable(removedSourceItem);
+
+                if (sourceTakeBackAcceptable < sourceTakeBackNumber)
+                {
+                    sourceDestination.AddItems(removedSourceItem, removedSourceNumber);
+                    destination.AddItems(removedDestinationItem, removedDestinationNumber);
+                    return;
+                }
+
+            }
+
+            var destinationTakeBackNumber = 0;
+
+            if (sourceMaxAcceptable < removedDestinationNumber)
+            {
+                destinationTakeBackNumber = removedDestinationNumber - sourceMaxAcceptable;
+
+                var destinationTakeBackAcceptable = destination.MaxAcceptable(removedDestinationItem);
+
+                if (destinationTakeBackAcceptable < destinationTakeBackNumber)
+                {
+                    sourceDestination.AddItems(removedSourceItem, removedSourceNumber);
+                    destination.AddItems(removedDestinationItem, removedDestinationNumber);
+                    return;
+                }
+
+            }
+
+            if (sourceTakeBackNumber > 0)
+            {
+                sourceDestination.AddItems(removedSourceItem, sourceTakeBackNumber);
+            }
+            if (destinationTakeBackNumber > 0)
+            {
+                destination.AddItems(removedDestinationItem, destinationTakeBackNumber);
+            }
+
+            if (sourceDestination.MaxAcceptable(removedDestinationItem) < removedDestinationNumber - destinationTakeBackNumber ||
+                destination.MaxAcceptable(removedSourceItem) < removedSourceNumber - sourceTakeBackNumber)
+            {
+                destination.AddItems(removedDestinationItem, removedDestinationNumber - destinationTakeBackNumber);
+                sourceDestination.AddItems(removedSourceItem, removedSourceNumber - sourceTakeBackNumber);
                 return;
             }
 
-            sourceDestination.AddItems(removedDestinationItem, removedDestinationNumber);
-            destination.AddItems(removedSourceItem, removedSourceNumber);
+
+            sourceDestination.AddItems(removedDestinationItem, removedDestinationNumber - destinationTakeBackNumber);
+            destination.AddItems(removedSourceItem, removedSourceNumber - sourceTakeBackNumber);
 
 
         }
