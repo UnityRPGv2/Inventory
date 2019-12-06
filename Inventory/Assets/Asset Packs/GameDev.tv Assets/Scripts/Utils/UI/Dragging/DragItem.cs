@@ -64,19 +64,53 @@ namespace RPG.Core.UI.Dragging
             return null;
         }
 
-        private void DropItemIntoContainer(IDragDestination<T> receivingContainer)
+        private void DropItemIntoContainer(IDragDestination<T> destination)
         {
-            var draggingItem = parentContainer.GetItem();
-            var draggingNumber = parentContainer.GetNumber();
+            var source = parentContainer;
 
-            var acceptable = receivingContainer.MaxAcceptable(draggingItem);
+            var draggingItem = source.GetItem();
+            var draggingNumber = source.GetNumber();
+
+            var acceptable = destination.MaxAcceptable(draggingItem);
             var toTransfer = Mathf.Min(acceptable, draggingNumber);
 
             if (toTransfer > 0)
             {
-                parentContainer.RemoveItems(toTransfer);
-                receivingContainer.AddItems(draggingItem, toTransfer);
+                source.RemoveItems(toTransfer);
+                destination.AddItems(draggingItem, toTransfer);
+                return;
             }
+
+            var destinationSource = destination as IDragSource<T>;
+            var sourceDestination = source as IDragDestination<T>;
+
+            if (destinationSource == null || sourceDestination == null) return;
+            print("Attempt swap");
+            var removedSourceNumber = source.GetNumber();
+            var removedSourceItem = source.GetItem();
+            source.RemoveItems(removedSourceNumber);
+
+            var removedDestinationNumber = destinationSource.GetNumber();
+            var removedDestinationItem  = destinationSource.GetItem();
+            destinationSource.RemoveItems(removedDestinationNumber);
+
+            var sourceMaxAcceptable = sourceDestination.MaxAcceptable(removedDestinationItem);
+
+            var destinationMaxAcceptable = destination.MaxAcceptable(removedSourceItem);
+
+            print("destinationMaxAcceptable " + destinationMaxAcceptable + " removedSourceNumber " + removedSourceNumber + " sourceMaxAcceptable " + sourceMaxAcceptable + " removedDestinationNumber " + removedDestinationNumber);
+
+            if (destinationMaxAcceptable < removedSourceNumber || sourceMaxAcceptable < removedDestinationNumber)
+            {
+                sourceDestination.AddItems(removedSourceItem, removedSourceNumber);
+                destination.AddItems(removedDestinationItem, removedDestinationNumber);
+                return;
+            }
+
+            sourceDestination.AddItems(removedDestinationItem, removedDestinationNumber);
+            destination.AddItems(removedSourceItem, removedSourceNumber);
+
+
         }
     }
 }

@@ -39,8 +39,8 @@ namespace RPG.UI.Inventories
         {
             EquipableItem equipableItem = item as EquipableItem;
             if (equipableItem == null) return 0;
-            if (GetItem() != null) return 0;
             if (equipableItem.allowedEquipLocation != equipLocation) return 0;
+            if (GetItem() != null) return 0;
 
             return 1;
         }
@@ -71,5 +71,6 @@ namespace RPG.UI.Inventories
         {
             _playerEquipment.RemoveItem(equipLocation);
         }
+
     }
 }
