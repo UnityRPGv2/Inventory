@@ -41,25 +41,11 @@ namespace RPG.Core.UI.Dragging
             transform.parent = _originalParent;
             GetComponent<CanvasGroup>().blocksRaycasts = true;
 
-            // Not over UI we should drop.
-            if (!EventSystem.current.IsPointerOverGameObject())
-            {
-                DropItem();
-            }
-
             var container = GetContainer(eventData);
             if (container != null)
             {
                 DropItemIntoContainer(container);
             }
-        }
-
-        private void DropItem()
-        {
-            var item = parentContainer.ReplaceItem(null);
-            var player = GameObject.FindWithTag("Player");
-            var dropHandler = player.GetComponent<IDiscardHandler<T>>();
-            dropHandler.DropItem(item);
         }
 
         private IDragContainer<T> GetContainer(PointerEventData eventData)
