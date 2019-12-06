@@ -99,6 +99,7 @@ namespace RPG.Inventories
         private int FindSlot(InventoryItem item)
         {
             int i = FindStack(item);
+            print(i);
             if (i < 0)
             {
                 i = FindEmptySlot();
@@ -171,7 +172,7 @@ namespace RPG.Inventories
             }
 
             var i = FindStack(item);
-            if (i > 0)
+            if (i >= 0)
             {
                 slot = i;
             }
