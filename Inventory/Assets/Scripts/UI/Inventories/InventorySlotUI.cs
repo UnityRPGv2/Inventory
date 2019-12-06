@@ -21,9 +21,9 @@ namespace RPG.UI.Inventories
             get => _inventory.GetItemInSlot(index);
         }
 
-        public void SetItem(InventoryItem item)
+        public void SetItem(InventoryItem item, int number)
         {
-            _icon.SetItem(item);
+            _icon.SetItem(item, number);
         }
 
         public InventoryItem ReplaceItem(InventoryItem item)

@@ -25,12 +25,11 @@ namespace RPG.Inventories
         public struct InventorySlot
         {
             public InventoryItem item;
+            public int number;
         }
 
         private void Awake() {
             slots = new InventorySlot[inventorySize];
-            slots[0].item = InventoryItem.GetFromID("ba374279-da85-4530-8052-4c10a8ce03b5");
-            slots[3].item = InventoryItem.GetFromID("bedb2849-78fb-4167-af74-96612a5b5229");
         }
 
         public event Action inventoryUpdated = delegate {};
@@ -39,9 +38,20 @@ namespace RPG.Inventories
         {
             for (int i = 0; i < slots.Length; i++)
             {
+                if (object.ReferenceEquals(slots[i].item, item))
+                {
+                    slots[i].number++;
+                    inventoryUpdated();
+                    return true;
+                }
+            }
+
+            for (int i = 0; i < slots.Length; i++)
+            {
                 if (slots[i].item == null)
                 {
                     slots[i].item = item;
+                    slots[i].number = 1;
                     inventoryUpdated();
                     return true;
                 }               
@@ -65,7 +75,11 @@ namespace RPG.Inventories
             {
                 if (object.ReferenceEquals(slots[i].item, consumeItem))
                 {
-                    slots[i].item = null;
+                    slots[i].number--;
+                    if (slots[i].number <= 0)
+                    {
+                        slots[i].item = null;
+                    }
                     inventoryUpdated();
                     return true;
                 }

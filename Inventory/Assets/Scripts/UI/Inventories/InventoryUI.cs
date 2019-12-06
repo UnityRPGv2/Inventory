@@ -31,7 +31,7 @@ namespace RPG.UI.Inventories
                 var itemUI = Instantiate(InventoryItemPrefab, transform);
                 itemUI.inventory = _playerInventory;
                 itemUI.index = i;
-                itemUI.SetItem(_playerInventory.slots[i].item);
+                itemUI.SetItem(_playerInventory.slots[i].item, _playerInventory.slots[i].number);
             }
         }
     }
