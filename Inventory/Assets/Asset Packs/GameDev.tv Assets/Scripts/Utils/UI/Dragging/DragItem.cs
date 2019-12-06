@@ -16,10 +16,10 @@ namespace RPG.Core.UI.Dragging
         private void Awake()
         {
             _parentCanvas = GetComponentInParent<Canvas>();
-            parentContainer = GetComponentInParent<IDragContainer<T>>();
+            parentContainer = GetComponentInParent<IDragSource<T>>();
         }
 
-        public IDragContainer<T> parentContainer { get; private set; }
+        public IDragSource<T> parentContainer { get; private set; }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
@@ -48,13 +48,13 @@ namespace RPG.Core.UI.Dragging
             }
         }
 
-        private IDragContainer<T> GetContainer(PointerEventData eventData)
+        private IDragDestination<T> GetContainer(PointerEventData eventData)
         {
             List<RaycastResult> results = new List<RaycastResult>();
             EventSystem.current.RaycastAll(eventData, results);
             foreach (var raycastResult in results)
             {
-                var container = raycastResult.gameObject.GetComponent<IDragContainer<T>>();
+                var container = raycastResult.gameObject.GetComponent<IDragDestination<T>>();
 
                 if (container != null) 
                 {
@@ -64,19 +64,18 @@ namespace RPG.Core.UI.Dragging
             return null;
         }
 
-        private void DropItemIntoContainer(IDragContainer<T> receivingContainer)
+        private void DropItemIntoContainer(IDragDestination<T> receivingContainer)
         {
-            var draggingItem = parentContainer.ReplaceItem(null);
-            if (!receivingContainer.CanAcceptItem(draggingItem))
+            var draggingItem = parentContainer.GetItem();
+            var draggingNumber = parentContainer.GetNumber();
+
+            var acceptable = receivingContainer.MaxAcceptable(draggingItem);
+            var toTransfer = Mathf.Min(acceptable, draggingNumber);
+
+            if (toTransfer > 0)
             {
-                parentContainer.ReplaceItem(draggingItem);
-                return;
-            }
-            
-            var swappedItem = receivingContainer.ReplaceItem(draggingItem);
-            if (swappedItem != null)
-            {
-                parentContainer.ReplaceItem(swappedItem);
+                parentContainer.RemoveItems(toTransfer);
+                receivingContainer.AddItems(draggingItem, toTransfer);
             }
         }
     }

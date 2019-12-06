@@ -8,6 +8,7 @@ namespace RPG.Inventories
     public class PickupSpawner : MonoBehaviour, ISaveable
     {
         [SerializeField] InventoryItem item;
+        [SerializeField] int number = 1;
 
         public Pickup pickup { get => GetComponentInChildren<Pickup>(); }
 
@@ -39,7 +40,7 @@ namespace RPG.Inventories
 
         private void SpawnPickup()
         {   
-            var spawnedPickup = item.SpawnPickup(transform.position);
+            var spawnedPickup = item.SpawnPickup(transform.position, number);
             spawnedPickup.transform.SetParent(transform);
         }
 

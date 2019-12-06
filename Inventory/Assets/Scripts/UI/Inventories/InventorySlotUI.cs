@@ -6,7 +6,7 @@ using RPG.Core.UI.Dragging;
 
 namespace RPG.UI.Inventories
 {
-    public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
+    public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragDestination<InventoryItem>, IDragSource<InventoryItem>
     {
         [SerializeField] InventoryItemIcon _icon;
 
@@ -26,14 +26,33 @@ namespace RPG.UI.Inventories
             _icon.SetItem(item, number);
         }
 
-        public InventoryItem ReplaceItem(InventoryItem item)
+        public int MaxAcceptable(InventoryItem item)
         {
-            return _inventory.ReplaceItemInSlot(item, index);
+            if (_inventory.HasSpaceFor(item))
+            {
+                return int.MaxValue;
+            }
+            return 0;
         }
 
-        public bool CanAcceptItem(InventoryItem item)
+        public void AddItems(InventoryItem item, int number)
         {
-            return true;
+            _inventory.AddItemToSlot(index, item, number);
+        }
+
+        public InventoryItem GetItem()
+        {
+            return _inventory.GetItemInSlot(index);
+        }
+
+        public int GetNumber()
+        {
+            return _inventory.GetNumberInSlot(index);
+        }
+
+        public void RemoveItems(int number)
+        {
+            _inventory.RemoveFromSlot(index, number);
         }
     }
 }

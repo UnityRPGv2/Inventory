@@ -21,14 +21,8 @@ namespace RPG.Inventories
             return equippedItems[slot];
         }
 
-        public EquipableItem ReplaceItemInSlot(EquipableItem.EquipLocation slot, EquipableItem item)
+        public void AddItem(EquipableItem.EquipLocation slot, EquipableItem item)
         {
-            EquipableItem replacedItem = null;
-            if (equippedItems.ContainsKey(slot))
-            {
-                replacedItem = equippedItems[slot];
-            }
-
             equippedItems[slot] = item;
 
             if (item)
@@ -36,8 +30,12 @@ namespace RPG.Inventories
                 item.Equip(slot, this);
             }
             equipmentUpdated();
+        }
 
-            return replacedItem;
+        public void RemoveItem(EquipableItem.EquipLocation slot)
+        {
+            equippedItems[slot] = null;
+            equipmentUpdated();
         }
 
         public object CaptureState()

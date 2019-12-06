@@ -7,18 +7,17 @@ using RPG.Inventories;
 
 namespace RPG.UI.Inventories
 {
-    public class InventoryDropTarget : MonoBehaviour, IDragContainer<InventoryItem>
+    public class InventoryDropTarget : MonoBehaviour, IDragDestination<InventoryItem>
     {
-        public InventoryItem ReplaceItem(InventoryItem item)
+        public void AddItems(InventoryItem item, int number)
         {
             var player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<Inventory>().DropItem(item);
-            return null;
+            player.GetComponent<Inventory>().DropItem(item, number);
         }
 
-        public bool CanAcceptItem(InventoryItem item)
+        public int MaxAcceptable(InventoryItem item)
         {
-            return true;
+            return int.MaxValue;
         }
     }
 }

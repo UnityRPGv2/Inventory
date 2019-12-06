@@ -7,7 +7,7 @@ using RPG.Inventories;
 
 namespace RPG.UI.Inventories
 {
-    public class EquipmentSlotUI : MonoBehaviour, IDragContainer<InventoryItem>
+    public class EquipmentSlotUI : MonoBehaviour, IDragDestination<InventoryItem>, IDragSource<InventoryItem>
     {
         [SerializeField] InventoryItemIcon _icon;
         [SerializeField] EquipableItem.EquipLocation equipLocation;
@@ -35,19 +35,41 @@ namespace RPG.UI.Inventories
             _icon.SetItem(_playerEquipment.GetItemInSlot(equipLocation));
         }
 
-        public InventoryItem ReplaceItem(InventoryItem item)
+        public int MaxAcceptable(InventoryItem item)
         {
-            return _playerEquipment.ReplaceItemInSlot(equipLocation, (EquipableItem)item);
+            EquipableItem equipableItem = item as EquipableItem;
+            if (equipableItem == null) return 0;
+            if (GetItem() != null) return 0;
+            if (equipableItem.allowedEquipLocation != equipLocation) return 0;
+
+            return 1;
         }
 
-        public bool CanAcceptItem(InventoryItem item)
+        public void AddItems(InventoryItem item, int number)
         {
-            if (!(item is EquipableItem))
+            _playerEquipment.AddItem(equipLocation, (EquipableItem) item);
+        }
+
+        public InventoryItem GetItem()
+        {
+            return _playerEquipment.GetItemInSlot(equipLocation);
+        }
+
+        public int GetNumber()
+        {
+            if (GetItem() != null)
             {
-                return false;
+                return 1;
             }
-            var equipableItem = (EquipableItem)item;
-            return equipableItem.allowedEquipLocation == equipLocation;
+            else
+            {
+                return 0;
+            }
+        }
+
+        public void RemoveItems(int number)
+        {
+            _playerEquipment.RemoveItem(equipLocation);
         }
     }
 }

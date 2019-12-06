@@ -57,12 +57,13 @@ namespace RPG.Inventories
         public string description => _description;
         public bool isStackable => _stackable;
 
-        public Pickup SpawnPickup(Vector3 position)
+        public Pickup SpawnPickup(Vector3 position, int number)
         {
             var pickupGameObject = Instantiate(_pickup);
             var pickup = pickupGameObject.AddComponent<Pickup>();
             pickup.transform.position = position;
             pickup.item = this;
+            pickup.number = number;
             return pickup;
         }
 
