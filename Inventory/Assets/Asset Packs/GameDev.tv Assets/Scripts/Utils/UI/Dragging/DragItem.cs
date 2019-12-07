@@ -63,94 +63,63 @@ namespace RPG.Core.UI.Dragging
             }
             return null;
         }
+        private interface IDragSrcDst : IDragSource<T>, IDragDestination<T> { }
 
         private void DropItemIntoContainer(IDragDestination<T> destination)
         {
             if (object.ReferenceEquals(destination, source)) return;
 
-            var destinationSource = destination as IDragSource<T>;
-            var sourceDestination = source as IDragDestination<T>;
+            var destinationSrcDst = destination as IDragSrcDst;
+            var sourceSrcDst = source as IDragSrcDst;
 
-            if (destinationSource == null || sourceDestination == null) 
+            // Swap won't be possible
+            if (destinationSrcDst == null || sourceSrcDst == null || destinationSrcDst.GetItem() == null)
             {
                 AttemptSimpleTransfer(destination);
                 return;
             }
+
+            AttemptSwap(destinationSrcDst, sourceSrcDst);
+        }
+
+        private void AttemptSwap(IDragSrcDst destination, IDragSrcDst source)
+        {
+            // Provisionally remove item from both sides. 
             var removedSourceNumber = source.GetNumber();
             var removedSourceItem = source.GetItem();
-            var removedDestinationNumber = destinationSource.GetNumber();
-            var removedDestinationItem = destinationSource.GetItem();
-
-            if (removedDestinationItem == null)
-            {
-                AttemptSimpleTransfer(destination);
-                return;
-            }
+            var removedDestinationNumber = destination.GetNumber();
+            var removedDestinationItem = destination.GetItem();
 
             source.RemoveItems(removedSourceNumber);
+            destination.RemoveItems(removedDestinationNumber);
 
-            destinationSource.RemoveItems(removedDestinationNumber);
+            var sourceTakeBackNumber = CalculateTakeBack(source, destination);
+            var destinationTakeBackNumber = CalculateTakeBack(destination, source);
 
-            var sourceMaxAcceptable = sourceDestination.MaxAcceptable(removedDestinationItem);
-
-            var destinationMaxAcceptable = destination.MaxAcceptable(removedSourceItem);
-
-            var sourceTakeBackNumber = 0;
-
-            if (destinationMaxAcceptable < removedSourceNumber)
-            {
-                sourceTakeBackNumber = removedSourceNumber - destinationMaxAcceptable;
-
-                var sourceTakeBackAcceptable = sourceDestination.MaxAcceptable(removedSourceItem);
-
-                if (sourceTakeBackAcceptable < sourceTakeBackNumber)
-                {
-                    sourceDestination.AddItems(removedSourceItem, removedSourceNumber);
-                    destination.AddItems(removedDestinationItem, removedDestinationNumber);
-                    return;
-                }
-
-            }
-
-            var destinationTakeBackNumber = 0;
-
-            if (sourceMaxAcceptable < removedDestinationNumber)
-            {
-                destinationTakeBackNumber = removedDestinationNumber - sourceMaxAcceptable;
-
-                var destinationTakeBackAcceptable = destination.MaxAcceptable(removedDestinationItem);
-
-                if (destinationTakeBackAcceptable < destinationTakeBackNumber)
-                {
-                    sourceDestination.AddItems(removedSourceItem, removedSourceNumber);
-                    destination.AddItems(removedDestinationItem, removedDestinationNumber);
-                    return;
-                }
-
-            }
-
+            // Do take backs (if needed)
             if (sourceTakeBackNumber > 0)
             {
-                sourceDestination.AddItems(removedSourceItem, sourceTakeBackNumber);
+                source.AddItems(removedSourceItem, sourceTakeBackNumber);
+                removedSourceNumber -= sourceTakeBackNumber;
             }
             if (destinationTakeBackNumber > 0)
             {
                 destination.AddItems(removedDestinationItem, destinationTakeBackNumber);
+                removedDestinationNumber -= destinationTakeBackNumber;
             }
 
-            if (sourceDestination.MaxAcceptable(removedDestinationItem) < removedDestinationNumber - destinationTakeBackNumber ||
-                destination.MaxAcceptable(removedSourceItem) < removedSourceNumber - sourceTakeBackNumber)
+            // Abort if we can't do a successful swap
+            if (source.MaxAcceptable(removedDestinationItem) < removedDestinationNumber ||
+                destination.MaxAcceptable(removedSourceItem) < removedSourceNumber)
             {
-                destination.AddItems(removedDestinationItem, removedDestinationNumber - destinationTakeBackNumber);
-                sourceDestination.AddItems(removedSourceItem, removedSourceNumber - sourceTakeBackNumber);
+                destination.AddItems(removedDestinationItem, removedDestinationNumber);
+                source.AddItems(removedSourceItem, removedSourceNumber);
                 return;
             }
 
-
-            sourceDestination.AddItems(removedDestinationItem, removedDestinationNumber - destinationTakeBackNumber);
-            destination.AddItems(removedSourceItem, removedSourceNumber - sourceTakeBackNumber);
-
-
+            // Do swaps
+            source.AddItems(removedDestinationItem, removedDestinationNumber);
+            destination.AddItems(removedSourceItem, removedSourceNumber);
         }
 
         private bool AttemptSimpleTransfer(IDragDestination<T> destination)
@@ -169,6 +138,29 @@ namespace RPG.Core.UI.Dragging
             }
 
             return true;
+        }
+
+        private int CalculateTakeBack(IDragSrcDst source, IDragSrcDst destination)
+        {
+            var removedNumber = source.GetNumber();
+            var removedItem = source.GetItem();
+
+            var takeBackNumber = 0;
+            var destinationMaxAcceptable = destination.MaxAcceptable(removedItem);
+
+            if (destinationMaxAcceptable < removedNumber)
+            {
+                takeBackNumber = removedNumber - destinationMaxAcceptable;
+
+                var sourceTakeBackAcceptable = source.MaxAcceptable(removedItem);
+
+                // Abort and reset
+                if (sourceTakeBackAcceptable < takeBackNumber)
+                {
+                    return 0;
+                }
+            }
+            return takeBackNumber;
         }
     }
 }
