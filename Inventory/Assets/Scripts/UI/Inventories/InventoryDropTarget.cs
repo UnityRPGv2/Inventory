@@ -12,7 +12,7 @@ namespace RPG.UI.Inventories
         public void AddItems(InventoryItem item, int number)
         {
             var player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<Inventory>().DropItem(item, number);
+            player.GetComponent<ItemDropper>().DropItem(item, number);
         }
 
         public int MaxAcceptable(InventoryItem item)

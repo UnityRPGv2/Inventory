@@ -34,7 +34,7 @@ namespace RPG.Inventories
 
         public void RemoveItem(EquipableItem.EquipLocation slot)
         {
-            equippedItems[slot] = null;
+            equippedItems.Remove(slot);
             equipmentUpdated();
         }
 

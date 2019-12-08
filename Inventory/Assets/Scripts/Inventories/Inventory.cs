@@ -7,25 +7,22 @@ namespace RPG.Inventories
 {
     public class Inventory : MonoBehaviour, ISaveable
     {
-
-        int coin;
-        private List<Pickup> droppedItems = new List<Pickup>();
-
-        [SerializeField] bool hasDeliveryItem = true; // TODO go from mock to real
         [SerializeField] int inventorySize;
 
         public InventorySlot[] slots { get; private set; }
-
-        public static Inventory GetPlayerInventory()
-        {
-            var player = GameObject.FindWithTag("Player");
-            return player.GetComponent<Inventory>();
-        }
 
         public struct InventorySlot
         {
             public InventoryItem item;
             public int number;
+        }
+
+        public event Action inventoryUpdated = delegate { };
+
+        public static Inventory GetPlayerInventory()
+        {
+            var player = GameObject.FindWithTag("Player");
+            return player.GetComponent<Inventory>();
         }
 
         private void Awake() {
@@ -36,8 +33,6 @@ namespace RPG.Inventories
         {
             return FindSlot(item) >= 0;
         }
-
-        public event Action inventoryUpdated = delegate {};
 
         public bool AddToFirstEmptySlot(InventoryItem item, int number)
         {
@@ -52,17 +47,6 @@ namespace RPG.Inventories
             slots[i].item = item;
             slots[i].number += number;
             inventoryUpdated();
-            return true;
-        }
-
-        public bool DropItem(InventoryItem item, int number)
-        {
-            if (item == null) return false;
-
-            var spawnLocation = transform.position;
-            SpawnPickup(item, spawnLocation, number);
-            inventoryUpdated();
-
             return true;
         }
 
@@ -136,12 +120,6 @@ namespace RPG.Inventories
             return -1;
         }
 
-        private void SpawnPickup(InventoryItem item, Vector3 spawnLocation, int number)
-        {
-            var pickup = item.SpawnPickup(spawnLocation, number);
-            droppedItems.Add(pickup);
-        }
-
         public InventoryItem GetItemInSlot(int slot)
         {
             return slots[slot].item;
@@ -182,106 +160,36 @@ namespace RPG.Inventories
             inventoryUpdated();
         }
 
-        private void CaptureInventoryState(IDictionary<string, object> state)
+        [System.Serializable]
+        private struct InventorySlotRecord
         {
-            var slotStrings = new string[inventorySize];
+            public string itemID;
+            public int number;
+        }
+    
+        public object CaptureState()
+        {
+            var slotStrings = new InventorySlotRecord[inventorySize];
             for (int i = 0; i < inventorySize; i++)
             {
                 if (slots[i].item != null)
                 {
-                    slotStrings[i] = slots[i].item.itemID;
+                    slotStrings[i].itemID = slots[i].item.itemID;
+                    slotStrings[i].number = slots[i].number;
                 }
             }
-            state["inventorySlots"] = slotStrings;
-        }
-
-        private void CaptureDropState(IDictionary<string, object> state)
-        {
-            RemoveDestroyedDrops();
-            var droppedItemsList = new Dictionary<string, object>[droppedItems.Count];
-            for (int i = 0; i < droppedItemsList.Length; i++)
-            {
-                droppedItemsList[i] = new Dictionary<string, object>();
-                droppedItemsList[i]["itemID"] = droppedItems[i].item.itemID;
-                droppedItemsList[i]["position"] = new SerializableVector3(droppedItems[i].transform.position);
-                droppedItemsList[i]["number"] = droppedItems[i].number;
-            }
-            state["droppedItems"] = droppedItemsList;
-        }
-
-        private void RemoveDestroyedDrops()
-        {
-            var newList = new List<Pickup>();
-            foreach (var item in droppedItems)
-            {
-                if (item != null)
-                {
-                    newList.Add(item);
-                }
-            }
-            droppedItems = newList;
-        }
-
-        private void DeleteAllDrops()
-        {
-            RemoveDestroyedDrops();
-            foreach (var item in droppedItems)
-            {
-                Destroy(item.gameObject);
-            }
-        }
-
-        private void RestoreInventory(IReadOnlyDictionary<string, object> state)
-        {
-            if (!state.ContainsKey("inventorySlots")) return;
-            var slotStrings = (string[])state["inventorySlots"];
-            for (int i = 0; i < inventorySize; i++)
-            {
-                slots[i].item = InventoryItem.GetFromID(slotStrings[i]);
-            }
-        }
-
-        public void AddCoin(int amount)
-        {
-            coin += amount;
-        }
-
-        public int GetCoinAmount()
-        {
-            return coin;
-        }
-
-        public bool IsPlayerCarrying()  // TODO pass paramater
-        {
-            return hasDeliveryItem;
-        }
-
-        public object CaptureState()
-        {
-            Dictionary<string, object> state = new Dictionary<string, object>();
-            CaptureInventoryState(state);
-            CaptureDropState(state);
-            return state;
+            return slotStrings;
         }
 
         public void RestoreState(object state)
         {
-            Dictionary<string, object> stateDict = (Dictionary<string, object>) state;
-            RestoreInventory(stateDict);
-            inventoryUpdated();
-
-            DeleteAllDrops();
-            if (stateDict.ContainsKey("droppedItems"))
+            var slotStrings = (InventorySlotRecord[])state;
+            for (int i = 0; i < inventorySize; i++)
             {
-                var droppedItemsList = (Dictionary<string, object>[])stateDict["droppedItems"];
-                foreach (var item in droppedItemsList)
-                {
-                    var pickupItem = InventoryItem.GetFromID((string)item["itemID"]);
-                    Vector3 position = ((SerializableVector3)item["position"]).ToVector();
-                    int number = ((int)item["number"]);
-                    SpawnPickup(pickupItem, position, number);
-                }
+                slots[i].item = InventoryItem.GetFromID(slotStrings[i].itemID);
+                slots[i].number = slotStrings[i].number;
             }
+            inventoryUpdated();
         }
     }
 }
