@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20eb1792e8048a46bf5c7c520a3ea3b, type: 3}
   m_Name: Hat
   m_EditorClassIdentifier: 
-  _itemID: 22e93450-3de9-4a75-a724-065b87616f96
+  _itemID: a7bdd051-2fb3-46b8-ab2f-bbe9c6257b78
   _baseCost: 0
   _rarity: 0
   _level: 0

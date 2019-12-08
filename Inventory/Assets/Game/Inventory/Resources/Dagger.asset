@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20eb1792e8048a46bf5c7c520a3ea3b, type: 3}
   m_Name: Dagger
   m_EditorClassIdentifier: 
-  _itemID: 22e93450-3de9-4a75-a724-065b87616f96
+  _itemID: 048088d0-8cfc-467d-8ca8-662c2fe4b91b
   _baseCost: 0
   _rarity: 0
   _level: 0
