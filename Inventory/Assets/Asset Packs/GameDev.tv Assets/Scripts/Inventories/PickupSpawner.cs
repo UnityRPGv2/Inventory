@@ -8,7 +8,6 @@ namespace GameDevTV.Inventories
     public class PickupSpawner : MonoBehaviour, ISaveable
     {
         [SerializeField] InventoryItem item;
-        [SerializeField] int number = 1;
 
         public Pickup pickup { get => GetComponentInChildren<Pickup>(); }
 
@@ -40,7 +39,7 @@ namespace GameDevTV.Inventories
 
         private void SpawnPickup()
         {   
-            var spawnedPickup = item.SpawnPickup(transform.position, number);
+            var spawnedPickup = item.SpawnPickup(transform.position);
             spawnedPickup.transform.SetParent(transform);
         }
 

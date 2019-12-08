@@ -9,7 +9,6 @@ namespace GameDevTV.Inventories
     public class Pickup : MonoBehaviour, IRaycastable
     {
         InventoryItem _item;
-        int _number = 1;
 
         Inventory _inventory;
 
@@ -21,7 +20,7 @@ namespace GameDevTV.Inventories
 
         public void PickupItem()
         {
-            bool foundSlot = _inventory.AddToFirstEmptySlot(_item, _number);
+            bool foundSlot = _inventory.AddToFirstEmptySlot(_item);
             if (foundSlot)
             {
                 Destroy(gameObject);
@@ -50,6 +49,5 @@ namespace GameDevTV.Inventories
         }
 
         public InventoryItem item { get { return _item; } set { _item = value; } }
-        public int number { get { return _number; } set { _number = value; } }
     }
 }

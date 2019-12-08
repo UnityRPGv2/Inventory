@@ -21,9 +21,9 @@ namespace InventoryExample.UI.Inventories
             get => _inventory.GetItemInSlot(index);
         }
 
-        public void SetItem(InventoryItem item, int number)
+        public void SetItem(InventoryItem item)
         {
-            _icon.SetItem(item, number);
+            _icon.SetItem(item);
         }
 
         public int MaxAcceptable(InventoryItem item)
@@ -37,7 +37,7 @@ namespace InventoryExample.UI.Inventories
 
         public void AddItems(InventoryItem item, int number)
         {
-            _inventory.AddItemToSlot(index, item, number);
+            _inventory.AddItemToSlot(index, item);
         }
 
         public InventoryItem GetItem()
@@ -47,12 +47,12 @@ namespace InventoryExample.UI.Inventories
 
         public int GetNumber()
         {
-            return _inventory.GetNumberInSlot(index);
+            return 1;
         }
 
         public void RemoveItems(int number)
         {
-            _inventory.RemoveFromSlot(index, number);
+            _inventory.RemoveFromSlot(index);
         }
     }
 }

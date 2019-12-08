@@ -7,15 +7,7 @@ using TMPro;
 
 public class InventoryItemIcon : MonoBehaviour
 {
-    [SerializeField] GameObject _textContainer;
-    [SerializeField] TextMeshProUGUI _itemNumber;
-
     public void SetItem(InventoryItem item)
-    {
-        SetItem(item, 0);
-    }
-
-    public void SetItem(InventoryItem item, int number)
     {
         var iconImage = GetComponent<Image>();
         if (item == null)
@@ -26,19 +18,6 @@ public class InventoryItemIcon : MonoBehaviour
         {
             iconImage.enabled = true;
             iconImage.sprite = item.icon;
-        }
-
-        if (_itemNumber)
-        {
-            if (number <= 1)
-            {
-                _textContainer.SetActive(false);
-            }
-            else
-            {
-                _textContainer.SetActive(true);
-                _itemNumber.text = number.ToString();
-            }
         }
     }
 }

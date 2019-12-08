@@ -12,7 +12,7 @@ namespace InventoryExample.UI.Inventories
         public void AddItems(InventoryItem item, int number)
         {
             var player = GameObject.FindGameObjectWithTag("Player");
-            player.GetComponent<ItemDropper>().DropItem(item, number);
+            player.GetComponent<ItemDropper>().DropItem(item);
         }
 
         public int MaxAcceptable(InventoryItem item)

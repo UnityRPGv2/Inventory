@@ -9,13 +9,7 @@ namespace GameDevTV.Inventories
     {
         [SerializeField] int inventorySize;
 
-        public InventorySlot[] slots { get; private set; }
-
-        public struct InventorySlot
-        {
-            public InventoryItem item;
-            public int number;
-        }
+        public InventoryItem[] slots { get; private set; }
 
         public event Action inventoryUpdated = delegate { };
 
@@ -26,25 +20,24 @@ namespace GameDevTV.Inventories
         }
 
         private void Awake() {
-            slots = new InventorySlot[inventorySize];
+            slots = new InventoryItem[inventorySize];
         }
 
         public bool HasSpaceFor(InventoryItem item)
         {
-            return FindSlot(item) >= 0;
+            return FindEmptySlot() >= 0;
         }
 
-        public bool AddToFirstEmptySlot(InventoryItem item, int number)
+        public bool AddToFirstEmptySlot(InventoryItem item)
         {
-            int i = FindSlot(item);
+            int i = FindEmptySlot();
 
             if (i < 0)
             {
                 return false;
             }
 
-            slots[i].item = item;
-            slots[i].number += number;
+            slots[i] = item;
             inventoryUpdated();
             return true;
         }
@@ -53,7 +46,7 @@ namespace GameDevTV.Inventories
         {
             for (int i = 0; i < slots.Length; i++)
             {
-                if (object.ReferenceEquals(slots[i].item, consumeItem))
+                if (object.ReferenceEquals(slots[i], consumeItem))
                 {
                     return true;
                 }
@@ -61,38 +54,11 @@ namespace GameDevTV.Inventories
             return false;
         }
 
-        private int FindSlot(InventoryItem item)
-        {
-            int i = FindStack(item);
-            if (i < 0)
-            {
-                i = FindEmptySlot();
-            }
-            return i;
-        }
-
         private int FindEmptySlot()
         {
             for (int i = 0; i < slots.Length; i++)
             {
-                if (slots[i].item == null)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-        private int FindStack(InventoryItem item)
-        {
-            if (!item.isStackable)
-            {
-                return -1;
-            }
-
-            for (int i = 0; i < slots.Length; i++)
-            {
-                if (object.ReferenceEquals(slots[i].item, item))
+                if (slots[i] == null)
                 {
                     return i;
                 }
@@ -102,60 +68,35 @@ namespace GameDevTV.Inventories
 
         public InventoryItem GetItemInSlot(int slot)
         {
-            return slots[slot].item;
+            return slots[slot];
         }
 
-        public int GetNumberInSlot(int slot)
+        public void RemoveFromSlot(int slot)
         {
-            return slots[slot].number;
-        }
-
-        public void RemoveFromSlot(int slot, int number)
-        {
-            slots[slot].number -= number;
-            if (slots[slot].number <= 0) 
-            {
-                slots[slot].number = 0;
-                slots[slot].item = null;
-            }
+            slots[slot] = null;
             inventoryUpdated();
         }
 
-        public void AddItemToSlot(int slot, InventoryItem item, int number)
+        public void AddItemToSlot(int slot, InventoryItem item)
         {
-            if (slots[slot].item != null)
+            if (slots[slot] != null)
             {
-                AddToFirstEmptySlot(item, number);
+                AddToFirstEmptySlot(item);
                 return;
             }
 
-            var i = FindStack(item);
-            if (i >= 0)
-            {
-                slot = i;
-            }
-
-            slots[slot].item = item;
-            slots[slot].number += number;
+            slots[slot] = item;
             inventoryUpdated();
         }
 
-        [System.Serializable]
-        private struct InventorySlotRecord
-        {
-            public string itemID;
-            public int number;
-        }
-    
         public object CaptureState()
         {
-            var slotStrings = new InventorySlotRecord[inventorySize];
+            var slotStrings = new string[inventorySize];
             for (int i = 0; i < inventorySize; i++)
             {
-                if (slots[i].item != null)
+                if (slots[i] != null)
                 {
-                    slotStrings[i].itemID = slots[i].item.itemID;
-                    slotStrings[i].number = slots[i].number;
+                    slotStrings[i] = slots[i].itemID;
                 }
             }
             return slotStrings;
@@ -163,11 +104,10 @@ namespace GameDevTV.Inventories
 
         public void RestoreState(object state)
         {
-            var slotStrings = (InventorySlotRecord[])state;
+            var slotStrings = (string[])state;
             for (int i = 0; i < inventorySize; i++)
             {
-                slots[i].item = InventoryItem.GetFromID(slotStrings[i].itemID);
-                slots[i].number = slotStrings[i].number;
+                slots[i] = InventoryItem.GetFromID(slotStrings[i]);
             }
             inventoryUpdated();
         }

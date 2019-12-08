@@ -10,19 +10,19 @@ namespace GameDevTV.Inventories
 
         private List<Pickup> droppedItems = new List<Pickup>();
 
-        public bool DropItem(InventoryItem item, int number)
+        public bool DropItem(InventoryItem item)
         {
             if (item == null) return false;
 
             var spawnLocation = transform.position;
-            SpawnPickup(item, spawnLocation, number);
+            SpawnPickup(item, spawnLocation);
 
             return true;
         }
 
-        private void SpawnPickup(InventoryItem item, Vector3 spawnLocation, int number)
+        private void SpawnPickup(InventoryItem item, Vector3 spawnLocation)
         {
-            var pickup = item.SpawnPickup(spawnLocation, number);
+            var pickup = item.SpawnPickup(spawnLocation);
             droppedItems.Add(pickup);
         }
 
@@ -32,7 +32,6 @@ namespace GameDevTV.Inventories
         {
             public string itemID;
             public SerializableVector3 position;
-            public int number;
         }
         public object CaptureState()
         {
@@ -42,7 +41,6 @@ namespace GameDevTV.Inventories
             {
                 droppedItemsList[i].itemID = droppedItems[i].item.itemID;
                 droppedItemsList[i].position = new SerializableVector3(droppedItems[i].transform.position);
-                droppedItemsList[i].number = droppedItems[i].number;
             }
             return droppedItemsList;
         }
@@ -54,8 +52,7 @@ namespace GameDevTV.Inventories
             {
                 var pickupItem = InventoryItem.GetFromID(item.itemID);
                 Vector3 position = item.position.ToVector();
-                int number = item.number;
-                SpawnPickup(pickupItem, position, number);
+                SpawnPickup(pickupItem, position);
             }
         }
 
