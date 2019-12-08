@@ -11,7 +11,7 @@ namespace RPG.Inventories
 
         public virtual void Use(GameObject player)
         {
-
+            Debug.Log("Using action: " + this);
         }
     }
 }

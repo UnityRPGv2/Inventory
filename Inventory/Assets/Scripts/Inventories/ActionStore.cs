@@ -10,13 +10,13 @@ namespace RPG.Inventories
         Dictionary<int, DockedItemSlot> dockedItems = new Dictionary<int, DockedItemSlot>();
         private class DockedItemSlot 
         {
-            public InventoryItem item;
+            public ActionItem item;
             public int number;
         }
 
         public event Action storeUpdated;
 
-        public InventoryItem GetAction(int index)
+        public ActionItem GetAction(int index)
         {
             if (dockedItems.ContainsKey(index))
             {
@@ -46,11 +46,25 @@ namespace RPG.Inventories
             else
             {
                 var slot = new DockedItemSlot();
-                slot.item = item;
+                slot.item = item as ActionItem;
                 slot.number = number;
                 dockedItems[index] = slot;
             }
             storeUpdated();
+        }
+
+        public bool Use(int index, GameObject player)
+        {
+            if (dockedItems.ContainsKey(index))
+            {
+                dockedItems[index].item.Use(player);
+                if (dockedItems[index].item.isConsumable)
+                {
+                    RemoveItems(index, 1);
+                }
+                return true;
+            }
+            return false;
         }
 
         public void RemoveItems(int index, int number)
