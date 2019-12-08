@@ -67,9 +67,21 @@ namespace RPG.Inventories
             
         }
 
-        public bool CanAcceptAction(InventoryItem item, int index)
+        public int MaxAcceptable(InventoryItem item, int index)
         {
-            return !dockedItems.ContainsKey(index) || object.ReferenceEquals(item, dockedItems[index].item);
+            var actionItem = item as ActionItem;
+            if (!actionItem) return 0;
+
+            if (dockedItems.ContainsKey(index) && !object.ReferenceEquals(item, dockedItems[index].item))
+            {
+                return 0;
+            }
+            if (actionItem.isConsumable)
+            {
+                return int.MaxValue;
+            }
+
+            return 1;
         }
 
         [System.Serializable]

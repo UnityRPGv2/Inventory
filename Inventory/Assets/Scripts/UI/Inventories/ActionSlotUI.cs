@@ -38,11 +38,7 @@ namespace RPG.UI.Inventories
 
         public int MaxAcceptable(InventoryItem item)
         {
-            if (_store.CanAcceptAction(item, index))
-            {
-                return int.MaxValue;
-            }
-            return 0;
+            return _store.MaxAcceptable(item, index);
         }
 
         public void RemoveItems(int number)
