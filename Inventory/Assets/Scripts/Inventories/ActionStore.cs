@@ -72,14 +72,33 @@ namespace RPG.Inventories
             return !dockedItems.ContainsKey(index) || object.ReferenceEquals(item, dockedItems[index].item);
         }
 
+        [System.Serializable]
+        private struct DockedItemRecord
+        {
+            public string itemID;
+            public int number;
+        }
+
         public object CaptureState()
         {
-            throw new NotImplementedException();
+            var state = new Dictionary<int, DockedItemRecord>();
+            foreach (var pair in dockedItems)
+            {
+                var record = new DockedItemRecord();
+                record.itemID = pair.Value.item.itemID;
+                record.number = pair.Value.number;
+                state[pair.Key] = record;
+            }
+            return state;
         }
 
         public void RestoreState(object state)
         {
-            throw new NotImplementedException();
+            var stateDict = (Dictionary<int, DockedItemRecord>)state;
+            foreach (var pair in stateDict)
+            {
+                AddAction(InventoryItem.GetFromID(pair.Value.itemID), pair.Key, pair.Value.number);
+            }
         }
     }
 }
