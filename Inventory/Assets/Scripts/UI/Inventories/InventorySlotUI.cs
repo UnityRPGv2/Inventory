@@ -6,7 +6,7 @@ using RPG.Core.UI.Dragging;
 
 namespace RPG.UI.Inventories
 {
-    public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragDestination<InventoryItem>, IDragSource<InventoryItem>
+    public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
     {
         [SerializeField] InventoryItemIcon _icon;
 

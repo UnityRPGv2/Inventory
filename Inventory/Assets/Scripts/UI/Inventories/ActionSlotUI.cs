@@ -2,41 +2,57 @@
 using System.Collections.Generic;
 using RPG.Core.UI.Dragging;
 using RPG.Inventories;
-// using RPG.SpecialActions;
 using UnityEngine;
 
 namespace RPG.UI.Inventories
 {
-    public class ActionSlotUI : MonoBehaviour/*, IItemHolder, IDragContainer<InventoryItem>*/
+    public class ActionSlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
     {
-        // [SerializeField] InventoryItemIcon _icon;
-        // [SerializeField] int index = 0;
+        [SerializeField] InventoryItemIcon _icon;
+        [SerializeField] int index = 0;
 
-        // SpecialAbilities _abilitiesStore;
+        ActionStore _store;
 
-        // public InventoryItem item { get => _abilitiesStore.GetAbility(index); }
+        public InventoryItem item => GetItem();
 
-        // private void Awake() {
-        //     _abilitiesStore = GameObject.FindGameObjectWithTag("Player").GetComponent<SpecialAbilities>();
-        //     _abilitiesStore.OnAbilitiesUpdated += UpdateIcon;
-        // }
+        private void Awake()
+        {
+            _store = GameObject.FindGameObjectWithTag("Player").GetComponent<ActionStore>();
+            _store.storeUpdated += UpdateIcon;
+        }
 
-        // bool IDragContainer<InventoryItem>.CanAcceptItem(InventoryItem item)
-        // {
-        //     return item is ActionConfig;
-        // }
+        public void AddItems(InventoryItem item, int number)
+        {
+            _store.AddAction(item, index, number);
+        }
 
-        // InventoryItem IDragContainer<InventoryItem>.ReplaceItem(InventoryItem item)
-        // {
-        //     _abilitiesStore.SetAbility(item as ActionConfig, index);
+        public InventoryItem GetItem()
+        {
+            return _store.GetAction(index);
+        }
 
-        //     // So that it isn't removed from previous place.
-        //     return item;
-        // }
+        public int GetNumber()
+        {
+            return _store.GetNumber(index);
+        }
 
-        // void UpdateIcon()
-        // {
-        //     _icon.SetItem(item);
-        // }
+        public int MaxAcceptable(InventoryItem item)
+        {
+            if (_store.CanAcceptAction(item, index))
+            {
+                return int.MaxValue;
+            }
+            return 0;
+        }
+
+        public void RemoveItems(int number)
+        {
+            _store.RemoveItems(index, number);
+        }
+
+        void UpdateIcon()
+        {
+            _icon.SetItem(GetItem(), GetNumber());
+        }
     }
 }

@@ -7,7 +7,7 @@ using RPG.Inventories;
 
 namespace RPG.UI.Inventories
 {
-    public class EquipmentSlotUI : MonoBehaviour, IDragDestination<InventoryItem>, IDragSource<InventoryItem>
+    public class EquipmentSlotUI : MonoBehaviour, IDragContainer<InventoryItem>
     {
         [SerializeField] InventoryItemIcon _icon;
         [SerializeField] EquipableItem.EquipLocation equipLocation;

@@ -63,26 +63,27 @@ namespace RPG.Core.UI.Dragging
             }
             return null;
         }
-        private interface IDragSrcDst : IDragSource<T>, IDragDestination<T> { }
 
         private void DropItemIntoContainer(IDragDestination<T> destination)
         {
             if (object.ReferenceEquals(destination, source)) return;
 
-            var destinationSrcDst = destination as IDragSrcDst;
-            var sourceSrcDst = source as IDragSrcDst;
+            var destinationContainer = destination as IDragContainer<T>;
+            var sourceContainer = source as IDragContainer<T>;
 
             // Swap won't be possible
-            if (destinationSrcDst == null || sourceSrcDst == null || destinationSrcDst.GetItem() == null)
+            if (destinationContainer == null || sourceContainer == null || 
+                destinationContainer.GetItem() == null || 
+                object.ReferenceEquals(destinationContainer.GetItem(), sourceContainer.GetItem()))
             {
                 AttemptSimpleTransfer(destination);
                 return;
             }
 
-            AttemptSwap(destinationSrcDst, sourceSrcDst);
+            AttemptSwap(destinationContainer, sourceContainer);
         }
 
-        private void AttemptSwap(IDragSrcDst destination, IDragSrcDst source)
+        private void AttemptSwap(IDragContainer<T> destination, IDragContainer<T> source)
         {
             // Provisionally remove item from both sides. 
             var removedSourceNumber = source.GetNumber();
@@ -93,8 +94,10 @@ namespace RPG.Core.UI.Dragging
             source.RemoveItems(removedSourceNumber);
             destination.RemoveItems(removedDestinationNumber);
 
-            var sourceTakeBackNumber = CalculateTakeBack(source, destination);
-            var destinationTakeBackNumber = CalculateTakeBack(destination, source);
+            var sourceTakeBackNumber = CalculateTakeBack(removedSourceItem, removedSourceNumber, source, destination);
+            var destinationTakeBackNumber = CalculateTakeBack(removedDestinationItem, removedDestinationNumber, destination, source);
+            print(sourceTakeBackNumber);
+            print(destinationTakeBackNumber);
 
             // Do take backs (if needed)
             if (sourceTakeBackNumber > 0)
@@ -108,6 +111,8 @@ namespace RPG.Core.UI.Dragging
                 removedDestinationNumber -= destinationTakeBackNumber;
             }
 
+            print(source.MaxAcceptable(removedDestinationItem));
+            print(destination.MaxAcceptable(removedSourceItem));
             // Abort if we can't do a successful swap
             if (source.MaxAcceptable(removedDestinationItem) < removedDestinationNumber ||
                 destination.MaxAcceptable(removedSourceItem) < removedSourceNumber)
@@ -118,8 +123,14 @@ namespace RPG.Core.UI.Dragging
             }
 
             // Do swaps
-            source.AddItems(removedDestinationItem, removedDestinationNumber);
-            destination.AddItems(removedSourceItem, removedSourceNumber);
+            if (removedDestinationNumber > 0)
+            {
+                source.AddItems(removedDestinationItem, removedDestinationNumber);
+            }
+            if (removedSourceNumber > 0)
+            {
+                destination.AddItems(removedSourceItem, removedSourceNumber);
+            }
         }
 
         private bool AttemptSimpleTransfer(IDragDestination<T> destination)
@@ -140,11 +151,8 @@ namespace RPG.Core.UI.Dragging
             return true;
         }
 
-        private int CalculateTakeBack(IDragSrcDst source, IDragSrcDst destination)
+        private int CalculateTakeBack(T removedItem, int removedNumber, IDragContainer<T> removeSource, IDragContainer<T> destination)
         {
-            var removedNumber = source.GetNumber();
-            var removedItem = source.GetItem();
-
             var takeBackNumber = 0;
             var destinationMaxAcceptable = destination.MaxAcceptable(removedItem);
 
@@ -152,7 +160,7 @@ namespace RPG.Core.UI.Dragging
             {
                 takeBackNumber = removedNumber - destinationMaxAcceptable;
 
-                var sourceTakeBackAcceptable = source.MaxAcceptable(removedItem);
+                var sourceTakeBackAcceptable = removeSource.MaxAcceptable(removedItem);
 
                 // Abort and reset
                 if (sourceTakeBackAcceptable < takeBackNumber)

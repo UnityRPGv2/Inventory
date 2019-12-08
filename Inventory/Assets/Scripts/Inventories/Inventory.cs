@@ -37,7 +37,6 @@ namespace RPG.Inventories
         public bool AddToFirstEmptySlot(InventoryItem item, int number)
         {
             int i = FindSlot(item);
-            print(number);
 
             if (i < 0)
             {
@@ -83,7 +82,6 @@ namespace RPG.Inventories
         private int FindSlot(InventoryItem item)
         {
             int i = FindStack(item);
-            print(i);
             if (i < 0)
             {
                 i = FindEmptySlot();
