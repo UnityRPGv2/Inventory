@@ -6,7 +6,7 @@ using GameDevTV.Core.UI.Dragging;
 
 namespace InventoryExample.UI.Inventories
 {
-    public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
+    public class InventorySlotUI : MonoBehaviour, IDragContainer<InventoryItem>
     {
         [SerializeField] InventoryItemIcon _icon;
 
@@ -16,10 +16,6 @@ namespace InventoryExample.UI.Inventories
         InventoryItem _item;
 
         public Inventory inventory { set { _inventory = value; } }
-
-        public InventoryItem item { 
-            get => _inventory.GetItemInSlot(index);
-        }
 
         public void SetItem(InventoryItem item)
         {
