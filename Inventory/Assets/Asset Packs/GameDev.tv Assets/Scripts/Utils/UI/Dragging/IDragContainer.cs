@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Core.UI.Dragging
+namespace GameDevTV.Core.UI.Dragging
 {
     public interface IDragContainer<T> : IDragDestination<T>, IDragSource<T> where T : class
     {

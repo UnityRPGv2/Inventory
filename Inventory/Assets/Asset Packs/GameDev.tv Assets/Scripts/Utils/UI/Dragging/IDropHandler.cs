@@ -1,4 +1,4 @@
-﻿namespace RPG.Core.UI.Dragging
+﻿namespace GameDevTV.Core.UI.Dragging
 {
     public interface IDiscardHandler<T>
     {

@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace RPG.Inventories
+namespace GameDevTV.Inventories
 {
-    [CreateAssetMenu(menuName = ("RPG/RPG.UI.InventorySystem/Equipable Item"))]
+    [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Equipable Item"))]
     public class EquipableItem : InventoryItem
     {
         public enum EquipLocation

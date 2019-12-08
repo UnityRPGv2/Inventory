@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.UI
+namespace GameDevTV.UI
 {
     public class StatsUI : MonoBehaviour
     {

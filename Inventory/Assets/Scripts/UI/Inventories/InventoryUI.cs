@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Inventories;
+using GameDevTV.Inventories;
 
-namespace RPG.UI.Inventories
+namespace GameDevTV.UI.Inventories
 {
     public class InventoryUI : MonoBehaviour
     {

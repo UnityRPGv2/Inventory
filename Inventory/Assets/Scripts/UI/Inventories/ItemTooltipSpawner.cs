@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Core.UI.Tooltips;
+using GameDevTV.Core.UI.Tooltips;
 
-namespace RPG.UI.Inventories
+namespace GameDevTV.UI.Inventories
 {
     public class ItemTooltipSpawner : TooltipSpawner
     {

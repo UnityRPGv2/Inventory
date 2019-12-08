@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using RPG.Core.UI.Dragging;
-using RPG.Inventories;
+using GameDevTV.Core.UI.Dragging;
+using GameDevTV.Inventories;
 
-namespace RPG.UI.Inventories
+namespace GameDevTV.UI.Inventories
 {
     public class EquipmentSlotUI : MonoBehaviour, IDragContainer<InventoryItem>
     {

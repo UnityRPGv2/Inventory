@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using RPG.Inventories;
+using GameDevTV.Inventories;
 using TMPro;
 
 public class InventoryItemIcon : MonoBehaviour

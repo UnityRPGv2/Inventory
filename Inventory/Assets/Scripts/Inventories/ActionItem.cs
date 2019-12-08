@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace RPG.Inventories
+namespace GameDevTV.Inventories
 {
-    [CreateAssetMenu(menuName = ("RPG/RPG.UI.InventorySystem/Action Item"))]
+    [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Action Item"))]
     public class ActionItem : InventoryItem
     {
         [SerializeField] bool _consumable = false;

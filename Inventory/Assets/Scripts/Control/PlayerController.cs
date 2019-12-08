@@ -3,7 +3,7 @@ using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
-using RPG.Inventories;
+using GameDevTV.Inventories;
 
 namespace InventoryExample.Control
 {

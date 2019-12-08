@@ -4,7 +4,7 @@ using UnityEngine;
 using GameDevTV.Saving;
 using InventoryExample.Control;
 
-namespace RPG.Inventories
+namespace GameDevTV.Inventories
 {
     public class Pickup : MonoBehaviour, IRaycastable
     {
