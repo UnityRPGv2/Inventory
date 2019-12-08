@@ -7,5 +7,6 @@ namespace InventoryExample.Control
         Combat,
         UI,
         Pickup,
+        FullPickup,
     }
 }

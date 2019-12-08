@@ -10,12 +10,18 @@ namespace RPG.Inventories
     {
         InventoryItem _item;
         int _number = 1;
-        
-        public void PickupItem()
+
+        Inventory _inventory;
+
+        private void Awake()
         {
             var player = GameObject.FindGameObjectWithTag("Player");
-            var inventory = player.GetComponent<Inventory>();
-            bool foundSlot = inventory.AddToFirstEmptySlot(_item, _number);
+            _inventory = player.GetComponent<Inventory>();
+        }
+
+        public void PickupItem()
+        {
+            bool foundSlot = _inventory.AddToFirstEmptySlot(_item, _number);
             if (foundSlot)
             {
                 Destroy(gameObject);
@@ -24,7 +30,14 @@ namespace RPG.Inventories
 
         public CursorType GetCursorType()
         {
-            return CursorType.Pickup;
+            if (_inventory.HasSpaceFor(_item))
+            {
+                return CursorType.Pickup;
+            }
+            else
+            {
+                return CursorType.FullPickup;
+            }
         }
 
         public bool HandleRaycast(PlayerController callingController)
