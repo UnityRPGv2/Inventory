@@ -4,7 +4,8 @@ using UnityEditor;
 
 namespace GameDevTV.Inventories
 {
-    public abstract class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
+    [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Inventory Item"))]
+    public class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
     {
         public enum Rarity
         {

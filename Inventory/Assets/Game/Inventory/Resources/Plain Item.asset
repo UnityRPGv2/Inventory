@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f20eb1792e8048a46bf5c7c520a3ea3b, type: 3}
-  m_Name: Hammer
+  m_Script: {fileID: 11500000, guid: 7dc047c233344664c9996be4c36379e2, type: 3}
+  m_Name: Plain Item
   m_EditorClassIdentifier: 
-  _itemID: 22e93450-3de9-4a75-a724-065b87616f96
+  _itemID: 2895d758-1928-4352-b531-b3d2cf6456fd
   _baseCost: 0
   _rarity: 0
   _level: 0
-  _displayName: Hammer
+  _displayName: Boot
   _description: 
-  _icon: {fileID: 21300000, guid: ec22508be0cdfba4abbaeb770bef08aa, type: 3}
+  _icon: {fileID: 21300000, guid: 53f59e0f1e337114a9de3d4cdfae9210, type: 3}
   _pickup: {fileID: 1222577395524571727, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
   _stackable: 1
-  _allowedEquipLocation: 5

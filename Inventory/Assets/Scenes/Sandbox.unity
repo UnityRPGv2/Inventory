@@ -130,7 +130,7 @@ PrefabInstance:
     - target: {fileID: 7936743508210502584, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
       propertyPath: m_Name
-      value: HatPickup (1)
+      value: Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 7936743508210502586, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -191,7 +191,7 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 53497eda88ae3b84281a349dbf33697b,
+      objectReference: {fileID: 11400000, guid: b639af67433f6464483cbe0493cb6a79,
         type: 2}
     - target: {fileID: 456029857307444114, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -285,7 +285,7 @@ PrefabInstance:
     - target: {fileID: 7936743508210502584, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
       propertyPath: m_Name
-      value: HatPickup (2)
+      value: Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 7936743508210502586, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -346,7 +346,7 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 720eb5cc07a73744cbf61cd4ecd15b39,
+      objectReference: {fileID: 11400000, guid: b639af67433f6464483cbe0493cb6a79,
         type: 2}
     - target: {fileID: 456029857307444114, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -365,7 +365,7 @@ PrefabInstance:
     - target: {fileID: 7936743508210502584, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
       propertyPath: m_Name
-      value: HatPickup (3)
+      value: Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 7936743508210502586, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -426,7 +426,7 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 720eb5cc07a73744cbf61cd4ecd15b39,
+      objectReference: {fileID: 11400000, guid: b639af67433f6464483cbe0493cb6a79,
         type: 2}
     - target: {fileID: 456029857307444114, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -536,7 +536,7 @@ PrefabInstance:
     - target: {fileID: 7936743508210502584, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
       propertyPath: m_Name
-      value: HatPickup (4)
+      value: Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 7936743508210502586, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -597,7 +597,7 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 4bb0d5407e245ba4aa73580d0af1eb89,
+      objectReference: {fileID: 11400000, guid: b639af67433f6464483cbe0493cb6a79,
         type: 2}
     - target: {fileID: 7936743508210502585, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -621,7 +621,7 @@ PrefabInstance:
     - target: {fileID: 7936743508210502584, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
       propertyPath: m_Name
-      value: HatPickup
+      value: Pickup
       objectReference: {fileID: 0}
     - target: {fileID: 7936743508210502586, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -682,7 +682,7 @@ PrefabInstance:
         type: 3}
       propertyPath: item
       value: 
-      objectReference: {fileID: 11400000, guid: 53497eda88ae3b84281a349dbf33697b,
+      objectReference: {fileID: 11400000, guid: b639af67433f6464483cbe0493cb6a79,
         type: 2}
     - target: {fileID: 456029857307444114, guid: 146deb5b00ba38d4c85ed275c1b7da63,
         type: 3}
@@ -1670,7 +1670,7 @@ PrefabInstance:
     - target: {fileID: 1073883832590197764, guid: 80bb38c4ef6d64b4ca647d70bce18ecf,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -545.0643
+      value: -570.7497
       objectReference: {fileID: 0}
     - target: {fileID: 1073883832590197764, guid: 80bb38c4ef6d64b4ca647d70bce18ecf,
         type: 3}
