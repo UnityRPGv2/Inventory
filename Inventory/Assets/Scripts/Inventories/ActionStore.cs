@@ -94,6 +94,10 @@ namespace RPG.Inventories
             {
                 return int.MaxValue;
             }
+            if (dockedItems.ContainsKey(index))
+            {
+                return 0;
+            }
 
             return 1;
         }

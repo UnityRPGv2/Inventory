@@ -96,8 +96,6 @@ namespace RPG.Core.UI.Dragging
 
             var sourceTakeBackNumber = CalculateTakeBack(removedSourceItem, removedSourceNumber, source, destination);
             var destinationTakeBackNumber = CalculateTakeBack(removedDestinationItem, removedDestinationNumber, destination, source);
-            print(sourceTakeBackNumber);
-            print(destinationTakeBackNumber);
 
             // Do take backs (if needed)
             if (sourceTakeBackNumber > 0)
@@ -111,8 +109,6 @@ namespace RPG.Core.UI.Dragging
                 removedDestinationNumber -= destinationTakeBackNumber;
             }
 
-            print(source.MaxAcceptable(removedDestinationItem));
-            print(destination.MaxAcceptable(removedSourceItem));
             // Abort if we can't do a successful swap
             if (source.MaxAcceptable(removedDestinationItem) < removedDestinationNumber ||
                 destination.MaxAcceptable(removedSourceItem) < removedSourceNumber)
