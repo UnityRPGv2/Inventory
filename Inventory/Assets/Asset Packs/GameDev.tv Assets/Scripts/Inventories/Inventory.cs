@@ -49,24 +49,6 @@ namespace GameDevTV.Inventories
             return true;
         }
 
-        public bool ConsumeItem(InventoryItem consumeItem)
-        {
-            for (int i = 0; i < slots.Length; i++)
-            {
-                if (object.ReferenceEquals(slots[i].item, consumeItem))
-                {
-                    slots[i].number--;
-                    if (slots[i].number <= 0)
-                    {
-                        slots[i].item = null;
-                    }
-                    inventoryUpdated();
-                    return true;
-                }
-            }
-            return false;
-        }
-
         public bool HasItem(InventoryItem consumeItem)
         {
             for (int i = 0; i < slots.Length; i++)
