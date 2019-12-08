@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Inventories;
 
-namespace GameDevTV.UI.Inventories
+namespace InventoryExample.UI.Inventories
 {
     public class InventoryUI : MonoBehaviour
     {

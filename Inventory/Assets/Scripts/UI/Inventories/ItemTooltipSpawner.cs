@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Core.UI.Tooltips;
 
-namespace GameDevTV.UI.Inventories
+namespace InventoryExample.UI.Inventories
 {
     public class ItemTooltipSpawner : TooltipSpawner
     {

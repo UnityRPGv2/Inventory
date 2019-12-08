@@ -2,7 +2,7 @@ using System.Collections;
 using GameDevTV.Saving;
 using UnityEngine;
 
-namespace GameDevTV.SceneManagement
+namespace InventoryExample.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {

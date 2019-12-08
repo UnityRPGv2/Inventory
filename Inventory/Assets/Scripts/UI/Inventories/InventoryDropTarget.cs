@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using GameDevTV.Core.UI.Dragging;
 using GameDevTV.Inventories;
 
-namespace GameDevTV.UI.Inventories
+namespace InventoryExample.UI.Inventories
 {
     public class InventoryDropTarget : MonoBehaviour, IDragDestination<InventoryItem>
     {
