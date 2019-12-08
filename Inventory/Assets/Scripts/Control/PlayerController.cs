@@ -3,7 +3,6 @@ using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
-using GameDevTV.Inventories;
 
 namespace InventoryExample.Control
 {
@@ -23,42 +22,11 @@ namespace InventoryExample.Control
 
         private void Update()
         {
-            CheckSpecialAbilityKeys();
-
             if (InteractWithUI()) return;
             if (InteractWithComponent()) return;
             if (InteractWithMovement()) return;
 
             SetCursor(CursorType.None);
-        }
-
-        private void CheckSpecialAbilityKeys()
-        {
-            var actionStore = GetComponent<ActionStore>();
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                actionStore.Use(0, gameObject);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                actionStore.Use(1, gameObject);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha3))
-            {
-                actionStore.Use(2, gameObject);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha4))
-            {
-                actionStore.Use(3, gameObject);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha5))
-            {
-                actionStore.Use(4, gameObject);
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha6))
-            {
-                actionStore.Use(5, gameObject);
-            }
         }
 
         private bool InteractWithUI()
