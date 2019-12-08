@@ -21,25 +21,9 @@ namespace GameDevTV.Inventories
 
         private void Awake() {
             slots = new InventoryItem[inventorySize];
-        }
-
-        public bool HasSpaceFor(InventoryItem item)
-        {
-            return FindEmptySlot() >= 0;
-        }
-
-        public bool AddToFirstEmptySlot(InventoryItem item)
-        {
-            int i = FindEmptySlot();
-
-            if (i < 0)
-            {
-                return false;
-            }
-
-            slots[i] = item;
-            inventoryUpdated();
-            return true;
+            slots[3] = InventoryItem.GetFromID("2895d758-1928-4352-b531-b3d2cf6456fd");
+            slots[7] = InventoryItem.GetFromID("2895d758-1928-4352-b531-b3d2cf6456fd");
+            slots[10] = InventoryItem.GetFromID("ffb821ba-a101-4679-9853-d5b577d6696b");
         }
 
         public bool HasItem(InventoryItem consumeItem)
@@ -79,12 +63,6 @@ namespace GameDevTV.Inventories
 
         public void AddItemToSlot(int slot, InventoryItem item)
         {
-            if (slots[slot] != null)
-            {
-                AddToFirstEmptySlot(item);
-                return;
-            }
-
             slots[slot] = item;
             inventoryUpdated();
         }

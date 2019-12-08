@@ -24,7 +24,7 @@ namespace InventoryExample.UI.Inventories
 
         public int MaxAcceptable(InventoryItem item)
         {
-            if (_inventory.HasSpaceFor(item))
+            if (_inventory.GetItemInSlot(index) == null)
             {
                 return int.MaxValue;
             }
