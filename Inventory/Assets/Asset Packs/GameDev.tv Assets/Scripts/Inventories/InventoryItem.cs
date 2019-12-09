@@ -24,7 +24,7 @@ namespace GameDevTV.Inventories
         [TextArea]
         [SerializeField] string _description;
         [SerializeField] Sprite _icon;
-        [SerializeField] GameObject _pickup;
+        [SerializeField] Pickup _pickup;
         [SerializeField] bool _stackable = false;
 
         static Dictionary<string, InventoryItem> itemLookupCache;
@@ -59,8 +59,7 @@ namespace GameDevTV.Inventories
 
         public Pickup SpawnPickup(Vector3 position, int number)
         {
-            var pickupGameObject = Instantiate(_pickup);
-            var pickup = pickupGameObject.AddComponent<Pickup>();
+            var pickup = Instantiate(_pickup);
             pickup.transform.position = position;
             pickup.item = this;
             pickup.number = number;

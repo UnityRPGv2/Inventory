@@ -6,7 +6,7 @@ using InventoryExample.Control;
 
 namespace GameDevTV.Inventories
 {
-    public class Pickup : MonoBehaviour, IRaycastable
+    public class Pickup : MonoBehaviour
     {
         InventoryItem _item;
         int _number = 1;
@@ -28,25 +28,9 @@ namespace GameDevTV.Inventories
             }
         }
 
-        public CursorType GetCursorType()
+        public bool CanBePickedUp()
         {
-            if (_inventory.HasSpaceFor(_item))
-            {
-                return CursorType.Pickup;
-            }
-            else
-            {
-                return CursorType.FullPickup;
-            }
-        }
-
-        public bool HandleRaycast(PlayerController callingController)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                PickupItem();
-            }
-            return true;
+            return _inventory.HasSpaceFor(_item);
         }
 
         public InventoryItem item { get { return _item; } set { _item = value; } }

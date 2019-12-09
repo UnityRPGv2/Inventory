@@ -19,6 +19,6 @@ MonoBehaviour:
   _displayName: Hammer
   _description: 
   _icon: {fileID: 21300000, guid: ec22508be0cdfba4abbaeb770bef08aa, type: 3}
-  _pickup: {fileID: 1222577395524571727, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
+  _pickup: {fileID: 6494234044896430859, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
   _stackable: 1
   _allowedEquipLocation: 5

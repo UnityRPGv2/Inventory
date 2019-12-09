@@ -19,6 +19,6 @@ MonoBehaviour:
   _displayName: Mana Potion
   _description: Tops up your mana.
   _icon: {fileID: 21300000, guid: f1dd815974b2d4240a6bc912d6585497, type: 3}
-  _pickup: {fileID: 1222577395524571727, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
+  _pickup: {fileID: 6494234044896430859, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
   _stackable: 1
   _consumable: 1
