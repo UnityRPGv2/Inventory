@@ -11,11 +11,14 @@ namespace InventoryExample.UI.Inventories
 
         [SerializeField] InventorySlotUI InventoryItemPrefab;
 
-        // Start is called before the first frame update
-        private void Start()
+        private void Awake() 
         {
             playerInventory = Inventory.GetPlayerInventory();
             playerInventory.inventoryUpdated += Redraw;
+        }
+
+        private void Start()
+        {
             Redraw();
         }
 

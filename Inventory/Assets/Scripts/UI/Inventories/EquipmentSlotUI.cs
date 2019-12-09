@@ -18,10 +18,15 @@ namespace InventoryExample.UI.Inventories
 
         Equipment playerEquipment;
 
-        private void Start() {
+        private void Awake() 
+        {
             var player = GameObject.FindGameObjectWithTag("Player");
             playerEquipment = player.GetComponent<Equipment>();
             playerEquipment.equipmentUpdated += RedrawUI;
+        }
+
+        private void Start() 
+        {
             RedrawUI();
         }
 

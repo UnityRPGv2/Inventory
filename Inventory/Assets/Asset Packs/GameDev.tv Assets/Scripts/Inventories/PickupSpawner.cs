@@ -20,6 +20,7 @@ namespace GameDevTV.Inventories
 
         private void Awake() 
         {
+            // Spawn in Awake so can be destroyed by save system after.
             SpawnPickup();
         }
 
