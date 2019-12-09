@@ -4,7 +4,7 @@ using UnityEngine;
 using GameDevTV.Core.UI.Dragging;
 using GameDevTV.Inventories;
 
-namespace InventoryExample.UI.Inventories
+namespace GameDevTV.UI.Inventories
 {
     public class InventoryDragItem : DragItem<InventoryItem>
     {

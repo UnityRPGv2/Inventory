@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Inventories;
 
-namespace InventoryExample.UI.Inventories
+namespace GameDevTV.UI.Inventories
 {
     public interface IItemHolder
     {

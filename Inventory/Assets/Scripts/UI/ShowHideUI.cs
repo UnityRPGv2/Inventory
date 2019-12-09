@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameDevTV.UI
+namespace InventoryExample.UI
 {
-    public class StatsUI : MonoBehaviour
+    public class ShowHideUI : MonoBehaviour
     {
         [SerializeField] GameObject uiContainer;
 

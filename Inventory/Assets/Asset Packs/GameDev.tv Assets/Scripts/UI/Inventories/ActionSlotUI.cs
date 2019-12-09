@@ -4,7 +4,7 @@ using GameDevTV.Core.UI.Dragging;
 using GameDevTV.Inventories;
 using UnityEngine;
 
-namespace InventoryExample.UI.Inventories
+namespace GameDevTV.UI.Inventories
 {
     public class ActionSlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
     {

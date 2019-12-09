@@ -1217,7 +1217,7 @@ GameObject:
   - component: {fileID: 223862058288242234}
   - component: {fileID: 114908635035062308}
   - component: {fileID: 114852176729683902}
-  - component: {fileID: 4214965815229376162}
+  - component: {fileID: 7037171178500257799}
   m_Layer: 5
   m_Name: Stats Canvas
   m_TagString: Untagged
@@ -1306,7 +1306,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4214965815229376162
+--- !u!114 &7037171178500257799
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1315,9 +1315,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1618136693512946}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 527c67af14b0bb547ad2d632e0479ff2, type: 3}
+  m_Script: {fileID: 11500000, guid: f7b6a7fac6e2d604a8e529f6dddf65b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toggleKey: 27
   uiContainer: {fileID: 1034273193031051067}
 --- !u!1 &1662895392605694
 GameObject:
@@ -1495,7 +1496,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: 188.87}
+  m_AnchoredPosition: {x: 0, y: 188.87}
   m_SizeDelta: {x: 1100.9, y: -735.75}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &222212814192087734
@@ -1571,7 +1572,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.024902344, y: -25}
+  m_AnchoredPosition: {x: 0.0234375, y: -25}
   m_SizeDelta: {x: -0.050293, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8678204806552336259
@@ -2486,12 +2487,12 @@ PrefabInstance:
     - target: {fileID: 4655522953391929268, guid: 9f83b4029f4b8bf48933ffe33ed0dd3e,
         type: 3}
       propertyPath: m_Value
-      value: -0.22950155
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4655522953391929268, guid: 9f83b4029f4b8bf48933ffe33ed0dd3e,
         type: 3}
       propertyPath: m_Size
-      value: 0.92051935
+      value: 0.942579
       objectReference: {fileID: 0}
     - target: {fileID: 4687004334158990512, guid: 9f83b4029f4b8bf48933ffe33ed0dd3e,
         type: 3}
@@ -3161,7 +3162,7 @@ PrefabInstance:
     - target: {fileID: 4761224670759172484, guid: 9f83b4029f4b8bf48933ffe33ed0dd3e,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -553.7553
+      value: -570.74994
       objectReference: {fileID: 0}
     - target: {fileID: 4761224670759172484, guid: 9f83b4029f4b8bf48933ffe33ed0dd3e,
         type: 3}
