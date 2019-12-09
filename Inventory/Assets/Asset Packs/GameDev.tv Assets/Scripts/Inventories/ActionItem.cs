@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace GameDevTV.Inventories
@@ -5,9 +6,12 @@ namespace GameDevTV.Inventories
     [CreateAssetMenu(menuName = ("GameDevTV/GameDevTV.UI.InventorySystem/Action Item"))]
     public class ActionItem : InventoryItem
     {
-        [SerializeField] bool _consumable = false;
+        [SerializeField] bool consumable = false;
 
-        public bool isConsumable => _consumable;
+        public bool isConsumable()
+        {
+            return consumable;
+        }
 
         public virtual void Use(GameObject player)
         {

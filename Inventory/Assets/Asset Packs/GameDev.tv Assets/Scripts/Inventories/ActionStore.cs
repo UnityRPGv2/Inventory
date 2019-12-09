@@ -58,7 +58,7 @@ namespace GameDevTV.Inventories
             if (dockedItems.ContainsKey(index))
             {
                 dockedItems[index].item.Use(player);
-                if (dockedItems[index].item.isConsumable)
+                if (dockedItems[index].item.isConsumable())
                 {
                     RemoveItems(index, 1);
                 }
@@ -90,7 +90,7 @@ namespace GameDevTV.Inventories
             {
                 return 0;
             }
-            if (actionItem.isConsumable)
+            if (actionItem.isConsumable())
             {
                 return int.MaxValue;
             }
@@ -115,7 +115,7 @@ namespace GameDevTV.Inventories
             foreach (var pair in dockedItems)
             {
                 var record = new DockedItemRecord();
-                record.itemID = pair.Value.item.itemID;
+                record.itemID = pair.Value.item.GetItemID();
                 record.number = pair.Value.number;
                 state[pair.Key] = record;
             }

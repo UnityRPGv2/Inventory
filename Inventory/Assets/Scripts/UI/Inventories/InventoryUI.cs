@@ -7,15 +7,15 @@ namespace InventoryExample.UI.Inventories
 {
     public class InventoryUI : MonoBehaviour
     {
-        Inventory _playerInventory;
+        Inventory playerInventory;
 
         [SerializeField] InventorySlotUI InventoryItemPrefab;
 
         // Start is called before the first frame update
         private void Start()
         {
-            _playerInventory = Inventory.GetPlayerInventory();
-            _playerInventory.inventoryUpdated += Redraw;
+            playerInventory = Inventory.GetPlayerInventory();
+            playerInventory.inventoryUpdated += Redraw;
             Redraw();
         }
 
@@ -26,12 +26,10 @@ namespace InventoryExample.UI.Inventories
                 Destroy(child.gameObject);
             }
 
-            for (int i = 0; i < _playerInventory.slots.Length; i++)
+            for (int i = 0; i < playerInventory.GetSize(); i++)
             {
                 var itemUI = Instantiate(InventoryItemPrefab, transform);
-                itemUI.inventory = _playerInventory;
-                itemUI.index = i;
-                itemUI.SetItem(_playerInventory.slots[i].item, _playerInventory.slots[i].number);
+                itemUI.Setup(playerInventory, i);
             }
         }
     }

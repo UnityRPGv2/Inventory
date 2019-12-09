@@ -12,11 +12,11 @@ namespace InventoryExample.UI.Inventories
             var itemTooltip = tooltip.GetComponent<ItemTooltip>();
             if (!itemTooltip) return;
 
-            var item = GetComponent<IItemHolder>().item;
+            var item = GetComponent<IItemHolder>().GetItem();
             if (!item) return;
 
-            itemTooltip.title = item.displayName;
-            itemTooltip.body = item.description;
+            itemTooltip.title = item.GetDisplayName();
+            itemTooltip.body = item.GetDescription();
         }
     }
 }

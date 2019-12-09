@@ -5,9 +5,9 @@ namespace GameDevTV.Core.UI.Tooltips
 {
     public abstract class TooltipSpawner : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] GameObject tooltipPrefab;
+        [SerializeField] GameObject tooltipPrefab = null;
 
-        GameObject _tooltip;
+        GameObject tooltip = null;
 
         private void OnDestroy()
         {
@@ -25,12 +25,12 @@ namespace GameDevTV.Core.UI.Tooltips
         {
             var parentCanvas = GetComponentInParent<Canvas>();
 
-            if (!_tooltip)
+            if (!tooltip)
             {
-                _tooltip = Instantiate(tooltipPrefab, parentCanvas.transform);
+                tooltip = Instantiate(tooltipPrefab, parentCanvas.transform);
             }
 
-            UpdateTooltip(_tooltip);
+            UpdateTooltip(tooltip);
 
             PositionTooltip();
         }
@@ -41,7 +41,7 @@ namespace GameDevTV.Core.UI.Tooltips
             Canvas.ForceUpdateCanvases();
 
             var tooltipCorners = new Vector3[4];
-            _tooltip.GetComponent<RectTransform>().GetWorldCorners(tooltipCorners);
+            tooltip.GetComponent<RectTransform>().GetWorldCorners(tooltipCorners);
             var slotCorners = new Vector3[4];
             GetComponent<RectTransform>().GetWorldCorners(slotCorners);
 
@@ -51,7 +51,7 @@ namespace GameDevTV.Core.UI.Tooltips
             int slotCorner = GetCornerIndex(below, right);
             int tooltipCorner = GetCornerIndex(!below, !right);
 
-            _tooltip.transform.position = slotCorners[slotCorner] - tooltipCorners[tooltipCorner] + _tooltip.transform.position;
+            tooltip.transform.position = slotCorners[slotCorner] - tooltipCorners[tooltipCorner] + tooltip.transform.position;
         }
 
         private int GetCornerIndex(bool below, bool right)
@@ -70,9 +70,9 @@ namespace GameDevTV.Core.UI.Tooltips
 
         private void ClearTooltip()
         {
-            if (_tooltip)
+            if (tooltip)
             {
-                Destroy(_tooltip.gameObject);
+                Destroy(tooltip.gameObject);
             }
         }
     }

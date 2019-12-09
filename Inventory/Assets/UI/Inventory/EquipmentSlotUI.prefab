@@ -56,7 +56,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3561121645966637724}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -65,8 +65,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: e1855ae875aa6424d81fb5c5c1d623a5, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -76,6 +74,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &5391756194287133340
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c58a7a667728d0342a09593ddb800bfb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 7308001084569389129}
+  icon: {fileID: 7308001084569389129}
   equipLocation: 0
 --- !u!1 &9062860880096009178
 GameObject:
@@ -147,7 +146,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 9062860880096009178}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -156,8 +155,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -167,6 +164,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!225 &7995044203599088422
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -203,3 +201,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 493934aefc2d7c9469174527fc9bf167, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  textContainer: {fileID: 0}
+  itemNumber: {fileID: 0}

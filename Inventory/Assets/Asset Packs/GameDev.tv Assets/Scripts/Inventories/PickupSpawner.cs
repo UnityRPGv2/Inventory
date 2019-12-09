@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using GameDevTV.Saving;
 
 namespace GameDevTV.Inventories
@@ -10,29 +8,36 @@ namespace GameDevTV.Inventories
         [SerializeField] InventoryItem item;
         [SerializeField] int number = 1;
 
-        public Pickup pickup { get => GetComponentInChildren<Pickup>(); }
+        public Pickup GetPickup() 
+        { 
+            return GetComponentInChildren<Pickup>();
+        }
 
-        public bool isCollected { get => pickup == null; }
+        public bool isCollected() 
+        { 
+            return GetPickup() == null;
+        }
 
-        private void Awake() {
+        private void Awake() 
+        {
             SpawnPickup();
         }
 
         public object CaptureState()
         {
-            return isCollected;
+            return isCollected();
         }
 
         public void RestoreState(object state)
         {
             bool shouldBeCollected = (bool)state;
 
-            if (shouldBeCollected && !isCollected)
+            if (shouldBeCollected && !isCollected())
             {
                 DestroyPickup();
             }
 
-            if (!shouldBeCollected && isCollected)
+            if (!shouldBeCollected && isCollected())
             {
                 SpawnPickup();
             }
@@ -46,9 +51,9 @@ namespace GameDevTV.Inventories
 
         private void DestroyPickup()
         {
-            if (pickup)
+            if (GetPickup())
             {
-                Destroy(pickup.gameObject);
+                Destroy(GetPickup().gameObject);
             }
         }
     }

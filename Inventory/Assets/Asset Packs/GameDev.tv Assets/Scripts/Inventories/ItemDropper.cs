@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Saving;
 
@@ -7,7 +6,6 @@ namespace GameDevTV.Inventories
 {
     public class ItemDropper : MonoBehaviour, ISaveable
     {
-
         private List<Pickup> droppedItems = new List<Pickup>();
 
         public bool DropItem(InventoryItem item, int number)
@@ -26,7 +24,6 @@ namespace GameDevTV.Inventories
             droppedItems.Add(pickup);
         }
 
-
         [System.Serializable]
         private struct DropRecord
         {
@@ -34,15 +31,16 @@ namespace GameDevTV.Inventories
             public SerializableVector3 position;
             public int number;
         }
+
         public object CaptureState()
         {
             RemoveDestroyedDrops();
             var droppedItemsList = new DropRecord[droppedItems.Count];
             for (int i = 0; i < droppedItemsList.Length; i++)
             {
-                droppedItemsList[i].itemID = droppedItems[i].item.itemID;
+                droppedItemsList[i].itemID = droppedItems[i].GetItem().GetItemID();
                 droppedItemsList[i].position = new SerializableVector3(droppedItems[i].transform.position);
-                droppedItemsList[i].number = droppedItems[i].number;
+                droppedItemsList[i].number = droppedItems[i].GetNumber();
             }
             return droppedItemsList;
         }

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 using GameDevTV.Saving;
 
@@ -9,7 +8,7 @@ namespace GameDevTV.Inventories
     {
         [SerializeField] int inventorySize;
 
-        public InventorySlot[] slots { get; private set; }
+        InventorySlot[] slots;
 
         public struct InventorySlot
         {
@@ -32,6 +31,11 @@ namespace GameDevTV.Inventories
         public bool HasSpaceFor(InventoryItem item)
         {
             return FindSlot(item) >= 0;
+        }
+
+        public int GetSize()
+        {
+            return slots.Length;
         }
 
         public bool AddToFirstEmptySlot(InventoryItem item, int number)
@@ -85,7 +89,7 @@ namespace GameDevTV.Inventories
 
         private int FindStack(InventoryItem item)
         {
-            if (!item.isStackable)
+            if (!item.IsStackable())
             {
                 return -1;
             }
@@ -154,7 +158,7 @@ namespace GameDevTV.Inventories
             {
                 if (slots[i].item != null)
                 {
-                    slotStrings[i].itemID = slots[i].item.itemID;
+                    slotStrings[i].itemID = slots[i].item.GetItemID();
                     slotStrings[i].number = slots[i].number;
                 }
             }

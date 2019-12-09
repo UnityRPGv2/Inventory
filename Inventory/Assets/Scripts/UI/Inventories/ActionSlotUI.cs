@@ -8,47 +8,45 @@ namespace InventoryExample.UI.Inventories
 {
     public class ActionSlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
     {
-        [SerializeField] InventoryItemIcon _icon;
+        [SerializeField] InventoryItemIcon icon;
         [SerializeField] int index = 0;
 
-        ActionStore _store;
-
-        public InventoryItem item => GetItem();
+        ActionStore store;
 
         private void Awake()
         {
-            _store = GameObject.FindGameObjectWithTag("Player").GetComponent<ActionStore>();
-            _store.storeUpdated += UpdateIcon;
+            store = GameObject.FindGameObjectWithTag("Player").GetComponent<ActionStore>();
+            store.storeUpdated += UpdateIcon;
         }
 
         public void AddItems(InventoryItem item, int number)
         {
-            _store.AddAction(item, index, number);
+            store.AddAction(item, index, number);
         }
 
         public InventoryItem GetItem()
         {
-            return _store.GetAction(index);
+            return store.GetAction(index);
         }
 
         public int GetNumber()
         {
-            return _store.GetNumber(index);
+            return store.GetNumber(index);
         }
 
         public int MaxAcceptable(InventoryItem item)
         {
-            return _store.MaxAcceptable(item, index);
+            return store.MaxAcceptable(item, index);
         }
 
         public void RemoveItems(int number)
         {
-            _store.RemoveItems(index, number);
+            store.RemoveItems(index, number);
         }
 
         void UpdateIcon()
         {
-            _icon.SetItem(GetItem(), GetNumber());
+            icon.SetItem(GetItem(), GetNumber());
         }
     }
 }

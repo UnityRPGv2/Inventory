@@ -8,27 +8,23 @@ namespace InventoryExample.UI.Inventories
 {
     public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
     {
-        [SerializeField] InventoryItemIcon _icon;
+        [SerializeField] InventoryItemIcon icon;
 
-        public int index { get; set; }
+        int index;
 
-        Inventory _inventory;
-        InventoryItem _item;
+        Inventory inventory;
+        InventoryItem item;
 
-        public Inventory inventory { set { _inventory = value; } }
-
-        public InventoryItem item { 
-            get => _inventory.GetItemInSlot(index);
-        }
-
-        public void SetItem(InventoryItem item, int number)
+        public void Setup(Inventory inventory, int index)
         {
-            _icon.SetItem(item, number);
+            this.inventory = inventory;
+            this.index = index;
+            icon.SetItem(inventory.GetItemInSlot(index), inventory.GetNumberInSlot(index));
         }
 
         public int MaxAcceptable(InventoryItem item)
         {
-            if (_inventory.HasSpaceFor(item))
+            if (inventory.HasSpaceFor(item))
             {
                 return int.MaxValue;
             }
@@ -37,22 +33,22 @@ namespace InventoryExample.UI.Inventories
 
         public void AddItems(InventoryItem item, int number)
         {
-            _inventory.AddItemToSlot(index, item, number);
+            inventory.AddItemToSlot(index, item, number);
         }
 
         public InventoryItem GetItem()
         {
-            return _inventory.GetItemInSlot(index);
+            return inventory.GetItemInSlot(index);
         }
 
         public int GetNumber()
         {
-            return _inventory.GetNumberInSlot(index);
+            return inventory.GetNumberInSlot(index);
         }
 
         public void RemoveItems(int number)
         {
-            _inventory.RemoveFromSlot(index, number);
+            inventory.RemoveFromSlot(index, number);
         }
     }
 }

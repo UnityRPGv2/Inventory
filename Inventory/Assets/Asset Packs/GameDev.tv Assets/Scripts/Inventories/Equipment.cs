@@ -7,11 +7,11 @@ namespace GameDevTV.Inventories
 {
     public class Equipment : MonoBehaviour, ISaveable
     {
-        Dictionary<EquipableItem.EquipLocation, EquipableItem> equippedItems = new Dictionary<EquipableItem.EquipLocation, EquipableItem>();
+        Dictionary<EquipLocation, EquipableItem> equippedItems = new Dictionary<EquipLocation, EquipableItem>();
 
         public event Action equipmentUpdated;
 
-        public EquipableItem GetItemInSlot(EquipableItem.EquipLocation slot)
+        public EquipableItem GetItemInSlot(EquipLocation slot)
         {
             if (!equippedItems.ContainsKey(slot))
             {
@@ -21,18 +21,14 @@ namespace GameDevTV.Inventories
             return equippedItems[slot];
         }
 
-        public void AddItem(EquipableItem.EquipLocation slot, EquipableItem item)
+        public void AddItem(EquipLocation slot, EquipableItem item)
         {
             equippedItems[slot] = item;
 
-            if (item)
-            {
-                item.Equip(slot, this);
-            }
             equipmentUpdated();
         }
 
-        public void RemoveItem(EquipableItem.EquipLocation slot)
+        public void RemoveItem(EquipLocation slot)
         {
             equippedItems.Remove(slot);
             equipmentUpdated();
@@ -40,19 +36,19 @@ namespace GameDevTV.Inventories
 
         public object CaptureState()
         {
-            var equippedItemsForSerialization = new Dictionary<EquipableItem.EquipLocation, string>();
+            var equippedItemsForSerialization = new Dictionary<EquipLocation, string>();
             foreach (var pair in equippedItems)
             {
-                equippedItemsForSerialization[pair.Key] = pair.Value.itemID;
+                equippedItemsForSerialization[pair.Key] = pair.Value.GetItemID();
             }
             return equippedItemsForSerialization;
         }
 
         public void RestoreState(object state)
         {
-            equippedItems = new Dictionary<EquipableItem.EquipLocation, EquipableItem>();
+            equippedItems = new Dictionary<EquipLocation, EquipableItem>();
 
-            var equippedItemsForSerialization = (Dictionary<EquipableItem.EquipLocation, string>)state;
+            var equippedItemsForSerialization = (Dictionary<EquipLocation, string>)state;
 
             foreach (var pair in equippedItemsForSerialization)
             {

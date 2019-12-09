@@ -7,8 +7,8 @@ using TMPro;
 
 public class InventoryItemIcon : MonoBehaviour
 {
-    [SerializeField] GameObject _textContainer;
-    [SerializeField] TextMeshProUGUI _itemNumber;
+    [SerializeField] GameObject textContainer;
+    [SerializeField] TextMeshProUGUI itemNumber;
 
     public void SetItem(InventoryItem item)
     {
@@ -25,19 +25,19 @@ public class InventoryItemIcon : MonoBehaviour
         else
         {
             iconImage.enabled = true;
-            iconImage.sprite = item.icon;
+            iconImage.sprite = item.GetIcon();
         }
 
-        if (_itemNumber)
+        if (itemNumber)
         {
             if (number <= 1)
             {
-                _textContainer.SetActive(false);
+                textContainer.SetActive(false);
             }
             else
             {
-                _textContainer.SetActive(true);
-                _itemNumber.text = number.ToString();
+                textContainer.SetActive(true);
+                itemNumber.text = number.ToString();
             }
         }
     }

@@ -12,13 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8358f0fcfcb22418d7b5d788e02cc4, type: 3}
   m_Name: Ability Scroll
   m_EditorClassIdentifier: 
-  _itemID: 081c4499-927a-4625-a3f5-4ff0f87623ce
-  _baseCost: 0
-  _rarity: 0
-  _level: 0
-  _displayName: Ability Scroll
-  _description: 
-  _icon: {fileID: 21300000, guid: a1ec2c0ddc0da634b85f0f465fec2d0d, type: 3}
-  _pickup: {fileID: 6494234044896430859, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
-  _stackable: 0
-  _consumable: 0
+  itemID: 9c948853-c63b-4635-8e18-b03dd4fc0c4d
+  displayName: Ability Scroll
+  description: Read this and you will get magical abilites. Honest guv!
+  icon: {fileID: 21300000, guid: a1ec2c0ddc0da634b85f0f465fec2d0d, type: 3}
+  pickup: {fileID: 6494234044896430859, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
+  stackable: 1
+  consumable: 1

@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15118cd9b2c3d764eae87df988166d65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _icon: {fileID: 2916464223493865297}
+  icon: {fileID: 2916464223493865297}
   index: 0
 --- !u!1001 &5047377936775530924
 PrefabInstance:
@@ -96,11 +96,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1659362928223511067}
     m_Modifications:
-    - target: {fileID: 812101378272355093, guid: 1973af7fc3e1d2b428983f58906580be,
-        type: 3}
-      propertyPath: m_Name
-      value: InventoryItem
-      objectReference: {fileID: 0}
     - target: {fileID: 1847210799765944866, guid: 1973af7fc3e1d2b428983f58906580be,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -205,6 +200,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 812101378272355093, guid: 1973af7fc3e1d2b428983f58906580be,
+        type: 3}
+      propertyPath: m_Name
+      value: InventoryItem
       objectReference: {fileID: 0}
     - target: {fileID: 7260453448564003565, guid: 1973af7fc3e1d2b428983f58906580be,
         type: 3}

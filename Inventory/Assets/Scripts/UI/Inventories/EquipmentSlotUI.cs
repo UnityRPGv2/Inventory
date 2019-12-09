@@ -9,37 +9,32 @@ namespace InventoryExample.UI.Inventories
 {
     public class EquipmentSlotUI : MonoBehaviour, IDragContainer<InventoryItem>
     {
-        [SerializeField] InventoryItemIcon _icon;
-        [SerializeField] EquipableItem.EquipLocation equipLocation;
+        [SerializeField] InventoryItemIcon icon = null;
+        [SerializeField] EquipLocation equipLocation = EquipLocation.Weapon;
 
-        public int index { get; set; }
+        int index;
 
-        EquipableItem _item;
+        EquipableItem item;
 
-        Equipment _playerEquipment;
-
-        public EquipableItem item
-        {
-            get => _playerEquipment.GetItemInSlot(equipLocation);
-        }
+        Equipment playerEquipment;
 
         private void Start() {
             var player = GameObject.FindGameObjectWithTag("Player");
-            _playerEquipment = player.GetComponent<Equipment>();
-            _playerEquipment.equipmentUpdated += RedrawUI;
+            playerEquipment = player.GetComponent<Equipment>();
+            playerEquipment.equipmentUpdated += RedrawUI;
             RedrawUI();
         }
 
         public void RedrawUI()
         {
-            _icon.SetItem(_playerEquipment.GetItemInSlot(equipLocation));
+            icon.SetItem(playerEquipment.GetItemInSlot(equipLocation));
         }
 
         public int MaxAcceptable(InventoryItem item)
         {
             EquipableItem equipableItem = item as EquipableItem;
             if (equipableItem == null) return 0;
-            if (equipableItem.allowedEquipLocation != equipLocation) return 0;
+            if (equipableItem.GetAllowedEquipLocation() != equipLocation) return 0;
             if (GetItem() != null) return 0;
 
             return 1;
@@ -47,12 +42,12 @@ namespace InventoryExample.UI.Inventories
 
         public void AddItems(InventoryItem item, int number)
         {
-            _playerEquipment.AddItem(equipLocation, (EquipableItem) item);
+            playerEquipment.AddItem(equipLocation, (EquipableItem) item);
         }
 
         public InventoryItem GetItem()
         {
-            return _playerEquipment.GetItemInSlot(equipLocation);
+            return playerEquipment.GetItemInSlot(equipLocation);
         }
 
         public int GetNumber()
@@ -69,7 +64,7 @@ namespace InventoryExample.UI.Inventories
 
         public void RemoveItems(int number)
         {
-            _playerEquipment.RemoveItem(equipLocation);
+            playerEquipment.RemoveItem(equipLocation);
         }
 
     }

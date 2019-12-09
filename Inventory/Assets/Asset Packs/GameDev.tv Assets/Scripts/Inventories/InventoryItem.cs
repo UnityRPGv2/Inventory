@@ -1,31 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 namespace GameDevTV.Inventories
 {
     public abstract class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
     {
-        public enum Rarity
-        {
-            Household,
-            Common,
-            Uncommon,
-            Rare,
-            Legendary,
-            Mythical
-        }
-
-        [SerializeField] string _itemID;
-        [SerializeField] float _baseCost;
-        [SerializeField] Rarity _rarity;
-        [SerializeField] int _level;
-        [SerializeField] string _displayName;
-        [TextArea]
-        [SerializeField] string _description;
-        [SerializeField] Sprite _icon;
-        [SerializeField] Pickup _pickup;
-        [SerializeField] bool _stackable = false;
+        [SerializeField] string itemID;
+        [SerializeField] string displayName;
+        [SerializeField][TextArea] string description;
+        [SerializeField] Sprite icon;
+        [SerializeField] Pickup pickup;
+        [SerializeField] bool stackable = false;
 
         static Dictionary<string, InventoryItem> itemLookupCache;
 
@@ -51,26 +37,44 @@ namespace GameDevTV.Inventories
             return itemLookupCache[itemID];
         }
 
-        public string itemID => _itemID;
-        public Sprite icon => _icon;
-        public string displayName => _displayName;
-        public string description => _description;
-        public bool isStackable => _stackable;
+        public Sprite GetIcon()
+        {
+            return icon;
+        }
+
+        public string GetItemID()
+        {
+            return itemID;
+        }
+
+        public bool IsStackable()
+        {
+            return stackable;
+        }
+
+        public string GetDisplayName()
+        {
+            return displayName;
+        }
+
+        public string GetDescription()
+        {
+            return description;
+        }
 
         public Pickup SpawnPickup(Vector3 position, int number)
         {
-            var pickup = Instantiate(_pickup);
+            var pickup = Instantiate(this.pickup);
             pickup.transform.position = position;
-            pickup.item = this;
-            pickup.number = number;
+            pickup.Setup(this, number);
             return pickup;
         }
 
         public void OnBeforeSerialize()
         {
-            if (string.IsNullOrWhiteSpace(_itemID))
+            if (string.IsNullOrWhiteSpace(itemID))
             {
-                _itemID = System.Guid.NewGuid().ToString();
+                itemID = System.Guid.NewGuid().ToString();
             }
         }
 

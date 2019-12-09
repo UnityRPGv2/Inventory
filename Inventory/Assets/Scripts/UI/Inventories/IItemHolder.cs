@@ -7,6 +7,6 @@ namespace InventoryExample.UI.Inventories
 {
     public interface IItemHolder
     {
-        InventoryItem item { get; }
+        InventoryItem GetItem();
     }
 }

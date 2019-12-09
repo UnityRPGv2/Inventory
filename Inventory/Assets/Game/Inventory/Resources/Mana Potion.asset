@@ -12,13 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be8358f0fcfcb22418d7b5d788e02cc4, type: 3}
   m_Name: Mana Potion
   m_EditorClassIdentifier: 
-  _itemID: b531c1df-cfe0-41b9-8bee-eeee82061b05
-  _baseCost: 0
-  _rarity: 0
-  _level: 0
-  _displayName: Mana Potion
-  _description: Tops up your mana.
-  _icon: {fileID: 21300000, guid: f1dd815974b2d4240a6bc912d6585497, type: 3}
-  _pickup: {fileID: 6494234044896430859, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
-  _stackable: 1
-  _consumable: 1
+  itemID: 403ea236-ab74-4ddb-b17d-06c69bd84778
+  displayName: Mana Potion
+  description: Top up you mana. But don't drink it too quickly! It has odd side effects.
+  icon: {fileID: 21300000, guid: f1dd815974b2d4240a6bc912d6585497, type: 3}
+  pickup: {fileID: 6494234044896430859, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
+  stackable: 1
+  consumable: 1

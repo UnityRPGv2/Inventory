@@ -8,24 +8,24 @@ namespace GameDevTV.Core.UI.Dragging
     public class DragItem<T> : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
         where T : class
     {
-        Vector3 _startPosition;
-        Transform _originalParent;
+        Vector3 startPosition;
+        Transform originalParent;
 
-        Canvas _parentCanvas;
+        Canvas parentCanvas;
 
         private void Awake()
         {
-            _parentCanvas = GetComponentInParent<Canvas>();
+            parentCanvas = GetComponentInParent<Canvas>();
             source = GetComponentInParent<IDragSource<T>>();
         }
 
-        public IDragSource<T> source { get; private set; }
+        IDragSource<T> source;
 
         public void OnBeginDrag(PointerEventData eventData)
         {
-            _startPosition = transform.position;
-            _originalParent = transform.parent;
-            transform.parent = _parentCanvas.transform;
+            startPosition = transform.position;
+            originalParent = transform.parent;
+            transform.parent = parentCanvas.transform;
             // Else won't get the drop event.
             GetComponent<CanvasGroup>().blocksRaycasts = false;
         }
@@ -37,8 +37,8 @@ namespace GameDevTV.Core.UI.Dragging
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            transform.position = _startPosition;
-            transform.parent = _originalParent;
+            transform.position = startPosition;
+            transform.parent = originalParent;
             GetComponent<CanvasGroup>().blocksRaycasts = true;
 
             var container = GetContainer(eventData);
