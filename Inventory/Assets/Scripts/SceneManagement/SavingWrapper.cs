@@ -6,6 +6,9 @@ namespace InventoryExample.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
+        [SerializeField] KeyCode saveKey;
+        [SerializeField] KeyCode loadKey;
+        [SerializeField] KeyCode deleteKey;
         const string defaultSaveFile = "save";
         
         private void Awake() 
@@ -18,15 +21,15 @@ namespace InventoryExample.SceneManagement
         }
 
         private void Update() {
-            if (Input.GetKeyDown(KeyCode.S))
+            if (Input.GetKeyDown(saveKey))
             {
                 Save();
             }
-            if (Input.GetKeyDown(KeyCode.L))
+            if (Input.GetKeyDown(loadKey))
             {
                 Load();
             }
-            if (Input.GetKeyDown(KeyCode.Delete))
+            if (Input.GetKeyDown(deleteKey))
             {
                 Delete();
             }
@@ -34,7 +37,7 @@ namespace InventoryExample.SceneManagement
 
         public void Load()
         {
-            GetComponent<SavingSystem>().Load(defaultSaveFile);
+            StartCoroutine(GetComponent<SavingSystem>().LoadLastScene(defaultSaveFile));
         }
 
         public void Save()

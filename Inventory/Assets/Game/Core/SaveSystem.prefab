@@ -44,6 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c2e2d2b3e70ec74e8def2d154bdef96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  saveKey: 115
+  loadKey: 108
+  deleteKey: 127
 --- !u!114 &3860198578962578749
 MonoBehaviour:
   m_ObjectHideFlags: 0
