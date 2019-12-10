@@ -41,20 +41,29 @@ namespace GameDevTV.Core.UI.Dragging
             GetComponent<CanvasGroup>().blocksRaycasts = true;
             transform.SetParent(originalParent, true);
 
-            var container = GetContainer(eventData);
+            IDragDestination<T> container;
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                container = parentCanvas.GetComponent<IDragDestination<T>>();
+            }
+            else
+            {
+                container = GetContainer(eventData);
+            }
+
             if (container != null)
             {
                 DropItemIntoContainer(container);
             }
+
+            
         }
 
         private IDragDestination<T> GetContainer(PointerEventData eventData)
         {
-            List<RaycastResult> results = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(eventData, results);
-            foreach (var raycastResult in results)
+            if (eventData.pointerEnter)
             {
-                var container = raycastResult.gameObject.GetComponent<IDragDestination<T>>();
+                var container = eventData.pointerEnter.GetComponent<IDragDestination<T>>();
 
                 if (container != null) 
                 {
