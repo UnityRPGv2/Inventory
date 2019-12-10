@@ -6,9 +6,9 @@ namespace InventoryExample.SceneManagement
 {
     public class SavingWrapper : MonoBehaviour
     {
-        [SerializeField] KeyCode saveKey;
-        [SerializeField] KeyCode loadKey;
-        [SerializeField] KeyCode deleteKey;
+        [SerializeField] KeyCode saveKey = KeyCode.S;
+        [SerializeField] KeyCode loadKey = KeyCode.L;
+        [SerializeField] KeyCode deleteKey = KeyCode.Delete;
         const string defaultSaveFile = "save";
         
         private void Awake() 

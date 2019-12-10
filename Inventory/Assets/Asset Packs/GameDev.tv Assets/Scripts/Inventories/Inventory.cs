@@ -6,7 +6,7 @@ namespace GameDevTV.Inventories
 {
     public class Inventory : MonoBehaviour, ISaveable
     {
-        [SerializeField] int inventorySize;
+        [SerializeField] int inventorySize = 16;
 
         InventorySlot[] slots;
 

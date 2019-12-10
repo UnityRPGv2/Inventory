@@ -6,8 +6,8 @@ namespace InventoryExample.UI
 {
     public class ShowHideUI : MonoBehaviour
     {
-        [SerializeField] KeyCode toggleKey;
-        [SerializeField] GameObject uiContainer;
+        [SerializeField] KeyCode toggleKey = KeyCode.Escape;
+        [SerializeField] GameObject uiContainer = null;
 
         // Start is called before the first frame update
         void Start()

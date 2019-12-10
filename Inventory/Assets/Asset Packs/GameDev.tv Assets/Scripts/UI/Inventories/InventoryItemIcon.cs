@@ -7,8 +7,8 @@ using TMPro;
 
 public class InventoryItemIcon : MonoBehaviour
 {
-    [SerializeField] GameObject textContainer;
-    [SerializeField] TextMeshProUGUI itemNumber;
+    [SerializeField] GameObject textContainer = null;
+    [SerializeField] TextMeshProUGUI itemNumber = null;
 
     public void SetItem(InventoryItem item)
     {

@@ -10,7 +10,7 @@ namespace InventoryExample.Control
     public class PlayerController : MonoBehaviour
     {
         [System.Serializable]
-        struct CursorMapping
+        public struct CursorMapping
         {
             public CursorType type;
             public Texture2D texture;

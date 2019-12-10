@@ -5,7 +5,7 @@ namespace GameDevTV.Inventories
 {
     public class PickupSpawner : MonoBehaviour, ISaveable
     {
-        [SerializeField] InventoryItem item;
+        [SerializeField] InventoryItem item = null;
         [SerializeField] int number = 1;
 
         public Pickup GetPickup() 

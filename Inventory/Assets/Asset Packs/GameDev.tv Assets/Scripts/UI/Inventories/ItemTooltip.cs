@@ -5,8 +5,8 @@ namespace GameDevTV.Core.UI.Tooltips
 {
     public class ItemTooltip : MonoBehaviour
     {
-        [SerializeField] TextMeshProUGUI titleText;
-        [SerializeField] TextMeshProUGUI bodyText;
+        [SerializeField] TextMeshProUGUI titleText = null;
+        [SerializeField] TextMeshProUGUI bodyText = null;
 
         public string title
         {

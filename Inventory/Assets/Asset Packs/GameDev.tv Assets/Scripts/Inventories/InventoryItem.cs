@@ -6,11 +6,11 @@ namespace GameDevTV.Inventories
 {
     public abstract class InventoryItem : ScriptableObject, ISerializationCallbackReceiver
     {
-        [SerializeField] string itemID;
-        [SerializeField] string displayName;
-        [SerializeField][TextArea] string description;
-        [SerializeField] Sprite icon;
-        [SerializeField] Pickup pickup;
+        [SerializeField] string itemID = null;
+        [SerializeField] string displayName = null;
+        [SerializeField][TextArea] string description = null;
+        [SerializeField] Sprite icon = null;
+        [SerializeField] Pickup pickup = null;
         [SerializeField] bool stackable = false;
 
         static Dictionary<string, InventoryItem> itemLookupCache;

@@ -9,7 +9,7 @@ namespace GameDevTV.UI.Inventories
     {
         Inventory playerInventory;
 
-        [SerializeField] InventorySlotUI InventoryItemPrefab;
+        [SerializeField] InventorySlotUI InventoryItemPrefab = null;
 
         private void Awake() 
         {

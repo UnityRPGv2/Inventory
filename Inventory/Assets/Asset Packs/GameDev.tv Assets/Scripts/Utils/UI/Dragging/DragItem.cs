@@ -25,9 +25,9 @@ namespace GameDevTV.Core.UI.Dragging
         {
             startPosition = transform.position;
             originalParent = transform.parent;
-            transform.parent = parentCanvas.transform;
             // Else won't get the drop event.
             GetComponent<CanvasGroup>().blocksRaycasts = false;
+            transform.SetParent(parentCanvas.transform, true);
         }
 
         public void OnDrag(PointerEventData eventData)
@@ -38,8 +38,8 @@ namespace GameDevTV.Core.UI.Dragging
         public void OnEndDrag(PointerEventData eventData)
         {
             transform.position = startPosition;
-            transform.parent = originalParent;
             GetComponent<CanvasGroup>().blocksRaycasts = true;
+            transform.SetParent(originalParent, true);
 
             var container = GetContainer(eventData);
             if (container != null)
