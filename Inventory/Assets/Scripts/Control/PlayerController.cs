@@ -21,9 +21,15 @@ namespace InventoryExample.Control
         [SerializeField] float maxNavMeshProjectionDistance = 1f;
         [SerializeField] float raycastRadius = 1f;
 
+        bool movementStarted = false;
+
         private void Update()
         {
             CheckSpecialAbilityKeys();
+            if (Input.GetMouseButtonUp(0))
+            {
+                movementStarted = false;
+            }
 
             if (InteractWithUI()) return;
             if (InteractWithComponent()) return;
@@ -109,7 +115,11 @@ namespace InventoryExample.Control
             {
                 if (!GetComponent<Mover>().CanMoveTo(target)) return false;
 
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonDown(0))
+                {
+                    movementStarted = true;
+                }
+                if (Input.GetMouseButton(0) && movementStarted)
                 {
                     GetComponent<Mover>().StartMoveAction(target, 1f);
                 }
