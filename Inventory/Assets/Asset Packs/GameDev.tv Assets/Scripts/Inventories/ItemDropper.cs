@@ -4,19 +4,29 @@ using GameDevTV.Saving;
 
 namespace GameDevTV.Inventories
 {
+    /// <summary>
+    /// To be placed on anything that wishes to drop pickups into the world.
+    /// Tracks the drops for saving and restoring.
+    /// </summary>
     public class ItemDropper : MonoBehaviour, ISaveable
     {
+        // STATE
         private List<Pickup> droppedItems = new List<Pickup>();
 
-        public bool DropItem(InventoryItem item, int number)
-        {
-            if (item == null) return false;
+        // PUBLIC
 
+        /// <summary>
+        /// Create a pickup at the current position.
+        /// </summary>
+        /// <param name="item">The item type for the pickup.</param>
+        /// <param name="number">The number of items contained in the pickup.</param>
+        public void DropItem(InventoryItem item, int number)
+        {
             var spawnLocation = transform.position;
             SpawnPickup(item, spawnLocation, number);
-
-            return true;
         }
+
+        // PRIVATE
 
         private void SpawnPickup(InventoryItem item, Vector3 spawnLocation, int number)
         {
@@ -32,7 +42,7 @@ namespace GameDevTV.Inventories
             public int number;
         }
 
-        public object CaptureState()
+        object ISaveable.CaptureState()
         {
             RemoveDestroyedDrops();
             var droppedItemsList = new DropRecord[droppedItems.Count];
@@ -45,7 +55,7 @@ namespace GameDevTV.Inventories
             return droppedItemsList;
         }
 
-        public void RestoreState(object state)
+        void ISaveable.RestoreState(object state)
         {
             var droppedItemsList = (DropRecord[])state;
             foreach (var item in droppedItemsList)
@@ -57,6 +67,9 @@ namespace GameDevTV.Inventories
             }
         }
 
+        /// <summary>
+        /// Remove any drops in the world that have subsequently been picked up.
+        /// </summary>
         private void RemoveDestroyedDrops()
         {
             var newList = new List<Pickup>();
