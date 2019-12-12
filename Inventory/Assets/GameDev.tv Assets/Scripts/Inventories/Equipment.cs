@@ -46,7 +46,10 @@ namespace GameDevTV.Inventories
 
             equippedItems[slot] = item;
 
-            equipmentUpdated();
+            if (equipmentUpdated != null)
+            {
+                equipmentUpdated();
+            }
         }
 
         /// <summary>
@@ -55,7 +58,10 @@ namespace GameDevTV.Inventories
         public void RemoveItem(EquipLocation slot)
         {
             equippedItems.Remove(slot);
-            equipmentUpdated();
+            if (equipmentUpdated != null)
+            {
+                equipmentUpdated();
+            }
         }
 
         // PRIVATE

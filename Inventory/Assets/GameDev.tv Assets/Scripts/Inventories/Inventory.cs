@@ -74,7 +74,10 @@ namespace GameDevTV.Inventories
 
             slots[i].item = item;
             slots[i].number += number;
-            inventoryUpdated();
+            if (inventoryUpdated != null)
+            {
+                inventoryUpdated();
+            }
             return true;
         }
 
@@ -121,7 +124,10 @@ namespace GameDevTV.Inventories
                 slots[slot].number = 0;
                 slots[slot].item = null;
             }
-            inventoryUpdated();
+            if (inventoryUpdated != null)
+            {
+                inventoryUpdated();
+            }
         }
 
         /// <summary>
@@ -148,7 +154,10 @@ namespace GameDevTV.Inventories
 
             slots[slot].item = item;
             slots[slot].number += number;
-            inventoryUpdated();
+            if (inventoryUpdated != null)
+            {
+                inventoryUpdated();
+            }
             return true;
         }
 
@@ -239,7 +248,10 @@ namespace GameDevTV.Inventories
                 slots[i].item = InventoryItem.GetFromID(slotStrings[i].itemID);
                 slots[i].number = slotStrings[i].number;
             }
-            inventoryUpdated();
+            if (inventoryUpdated != null)
+            {
+                inventoryUpdated();
+            }
         }
     }
 }

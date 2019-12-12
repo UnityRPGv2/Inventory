@@ -78,7 +78,10 @@ namespace GameDevTV.Inventories
                 slot.number = number;
                 dockedItems[index] = slot;
             }
-            storeUpdated();
+            if (storeUpdated != null)
+            {
+                storeUpdated();
+            }
         }
 
         /// <summary>
@@ -113,7 +116,10 @@ namespace GameDevTV.Inventories
                 {
                     dockedItems.Remove(index);
                 }
-                storeUpdated();
+                if (storeUpdated != null)
+                {
+                    storeUpdated();
+                }
             }
             
         }

@@ -1,9 +1,7 @@
 using System;
 using System.Collections.Generic;
-using InventoryExample.Core;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace GameDevTV.Saving
 {
