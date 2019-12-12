@@ -1,35 +1,24 @@
 ﻿using UnityEngine;
 using TMPro;
+using GameDevTV.Inventories;
 
-namespace GameDevTV.Core.UI.Tooltips
+namespace GameDevTV.UI.Inventories
 {
+    /// <summary>
+    /// Root of the tooltip prefab to expose properties to other classes.
+    /// </summary>
     public class ItemTooltip : MonoBehaviour
     {
+        // CONFIG DATA
         [SerializeField] TextMeshProUGUI titleText = null;
         [SerializeField] TextMeshProUGUI bodyText = null;
 
-        public string title
-        {
-            set
-            {
-                titleText.text = value;
-            }
-            get
-            {
-                return titleText.text;
-            }
-        }
+        // PUBLIC
 
-        public string body
+        public void Setup(InventoryItem item)
         {
-            set
-            {
-                bodyText.text = value;
-            }
-            get
-            {
-                return bodyText.text;
-            }
+            titleText.text = item.GetDisplayName();
+            bodyText.text = item.GetDescription();
         }
     }
 }

@@ -7,17 +7,21 @@ using GameDevTV.Inventories;
 
 namespace GameDevTV.UI.Inventories
 {
+    /// <summary>
+    /// An slot for the players equipment.
+    /// </summary>
     public class EquipmentSlotUI : MonoBehaviour, IDragContainer<InventoryItem>
     {
+        // CONFIG DATA
+
         [SerializeField] InventoryItemIcon icon = null;
         [SerializeField] EquipLocation equipLocation = EquipLocation.Weapon;
 
-        int index;
-
-        EquipableItem item;
-
+        // CACHE
         Equipment playerEquipment;
 
+        // LIFECYCLE METHODS
+       
         private void Awake() 
         {
             var player = GameObject.FindGameObjectWithTag("Player");
@@ -30,10 +34,7 @@ namespace GameDevTV.UI.Inventories
             RedrawUI();
         }
 
-        public void RedrawUI()
-        {
-            icon.SetItem(playerEquipment.GetItemInSlot(equipLocation));
-        }
+        // PUBLIC
 
         public int MaxAcceptable(InventoryItem item)
         {
@@ -72,5 +73,11 @@ namespace GameDevTV.UI.Inventories
             playerEquipment.RemoveItem(equipLocation);
         }
 
+        // PRIVATE
+
+        void RedrawUI()
+        {
+            icon.SetItem(playerEquipment.GetItemInSlot(equipLocation));
+        }
     }
 }

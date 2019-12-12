@@ -5,6 +5,10 @@ using GameDevTV.Core.UI.Tooltips;
 
 namespace GameDevTV.UI.Inventories
 {
+    /// <summary>
+    /// To be placed on a UI slot to spawn and show the correct item tooltip.
+    /// </summary>
+    [RequireComponent(typeof(IItemHolder))]
     public class ItemTooltipSpawner : TooltipSpawner
     {
         public override void UpdateTooltip(GameObject tooltip)
@@ -15,8 +19,7 @@ namespace GameDevTV.UI.Inventories
             var item = GetComponent<IItemHolder>().GetItem();
             if (!item) return;
 
-            itemTooltip.title = item.GetDisplayName();
-            itemTooltip.body = item.GetDescription();
+            itemTooltip.Setup(item);
         }
     }
 }

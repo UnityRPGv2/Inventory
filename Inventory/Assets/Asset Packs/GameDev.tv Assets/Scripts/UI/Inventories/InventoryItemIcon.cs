@@ -5,39 +5,50 @@ using UnityEngine.UI;
 using GameDevTV.Inventories;
 using TMPro;
 
-public class InventoryItemIcon : MonoBehaviour
+namespace GameDevTV.UI.Inventories
 {
-    [SerializeField] GameObject textContainer = null;
-    [SerializeField] TextMeshProUGUI itemNumber = null;
-
-    public void SetItem(InventoryItem item)
+    /// <summary>
+    /// To be put on the icon representing an inventory item. Allows the slot to
+    /// update the icon and number.
+    /// </summary>
+    [RequireComponent(typeof(Image))]
+    public class InventoryItemIcon : MonoBehaviour
     {
-        SetItem(item, 0);
-    }
+        // CONFIG DATA
+        [SerializeField] GameObject textContainer = null;
+        [SerializeField] TextMeshProUGUI itemNumber = null;
 
-    public void SetItem(InventoryItem item, int number)
-    {
-        var iconImage = GetComponent<Image>();
-        if (item == null)
+        // PUBLIC
+
+        public void SetItem(InventoryItem item)
         {
-            iconImage.enabled = false;
-        }
-        else
-        {
-            iconImage.enabled = true;
-            iconImage.sprite = item.GetIcon();
+            SetItem(item, 0);
         }
 
-        if (itemNumber)
+        public void SetItem(InventoryItem item, int number)
         {
-            if (number <= 1)
+            var iconImage = GetComponent<Image>();
+            if (item == null)
             {
-                textContainer.SetActive(false);
+                iconImage.enabled = false;
             }
             else
             {
-                textContainer.SetActive(true);
-                itemNumber.text = number.ToString();
+                iconImage.enabled = true;
+                iconImage.sprite = item.GetIcon();
+            }
+
+            if (itemNumber)
+            {
+                if (number <= 1)
+                {
+                    textContainer.SetActive(false);
+                }
+                else
+                {
+                    textContainer.SetActive(true);
+                    itemNumber.text = number.ToString();
+                }
             }
         }
     }

@@ -8,12 +8,15 @@ namespace GameDevTV.UI.Inventories
 {
     public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
     {
+        // CONFIG DATA
         [SerializeField] InventoryItemIcon icon = null;
 
+        // STATE
         int index;
-
-        Inventory inventory;
         InventoryItem item;
+        Inventory inventory;
+
+        // PUBLIC
 
         public void Setup(Inventory inventory, int index)
         {
