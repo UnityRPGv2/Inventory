@@ -5,23 +5,40 @@ using UnityEngine.EventSystems;
 
 namespace GameDevTV.Core.UI.Dragging
 {
+    /// <summary>
+    /// Allows a UI element to be dragged and dropped from and to a container.
+    /// 
+    /// Create a subclass for the type you want to be draggable. Then place on
+    /// the UI element you want to make draggable.
+    /// 
+    /// During dragging, the item is reparented to the parent canvas.
+    /// 
+    /// After the item is dropped it will be automatically return to the
+    /// original UI parent. It is the job of components implementing `IDragContainer`,
+    /// `IDragDestination and `IDragSource` to update the interface after a drag
+    /// has occurred.
+    /// </summary>
+    /// <typeparam name="T">The type that represents the item being dragged.</typeparam>
     public class DragItem<T> : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
         where T : class
     {
+        // PRIVATE STATE
         Vector3 startPosition;
         Transform originalParent;
+        IDragSource<T> source;
 
+        // CACHED REFERENCES
         Canvas parentCanvas;
 
+        // LIFECYCLE METHODS
         private void Awake()
         {
             parentCanvas = GetComponentInParent<Canvas>();
             source = GetComponentInParent<IDragSource<T>>();
         }
 
-        IDragSource<T> source;
-
-        public void OnBeginDrag(PointerEventData eventData)
+        // PRIVATE
+        void IBeginDragHandler.OnBeginDrag(PointerEventData eventData)
         {
             startPosition = transform.position;
             originalParent = transform.parent;
@@ -30,12 +47,12 @@ namespace GameDevTV.Core.UI.Dragging
             transform.SetParent(parentCanvas.transform, true);
         }
 
-        public void OnDrag(PointerEventData eventData)
+        void IDragHandler.OnDrag(PointerEventData eventData)
         {
             transform.position = eventData.position;
         }
 
-        public void OnEndDrag(PointerEventData eventData)
+        void IEndDragHandler.OnEndDrag(PointerEventData eventData)
         {
             transform.position = startPosition;
             GetComponent<CanvasGroup>().blocksRaycasts = true;
