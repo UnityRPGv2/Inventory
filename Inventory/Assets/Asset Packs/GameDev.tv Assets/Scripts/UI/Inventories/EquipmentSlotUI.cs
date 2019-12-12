@@ -10,7 +10,7 @@ namespace GameDevTV.UI.Inventories
     /// <summary>
     /// An slot for the players equipment.
     /// </summary>
-    public class EquipmentSlotUI : MonoBehaviour, IDragContainer<InventoryItem>
+    public class EquipmentSlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
     {
         // CONFIG DATA
 

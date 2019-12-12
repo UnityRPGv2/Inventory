@@ -27,6 +27,11 @@ namespace GameDevTV.Core.UI.Tooltips
         /// The spawned tooltip prefab for updating.
         /// </param>
         public abstract void UpdateTooltip(GameObject tooltip);
+        
+        /// <summary>
+        /// Return true when the tooltip spawner should be allowed to create a tooltip.
+        /// </summary>
+        public abstract bool CanCreateTooltip();
 
         // PRIVATE
 
@@ -44,14 +49,21 @@ namespace GameDevTV.Core.UI.Tooltips
         {
             var parentCanvas = GetComponentInParent<Canvas>();
 
-            if (!tooltip)
+            if (tooltip && !CanCreateTooltip())
+            {
+                ClearTooltip();
+            }
+
+            if (!tooltip && CanCreateTooltip())
             {
                 tooltip = Instantiate(tooltipPrefab, parentCanvas.transform);
             }
 
-            UpdateTooltip(tooltip);
-
-            PositionTooltip();
+            if (tooltip)
+            {
+                UpdateTooltip(tooltip);
+                PositionTooltip();
+            }
         }
 
         private void PositionTooltip()
