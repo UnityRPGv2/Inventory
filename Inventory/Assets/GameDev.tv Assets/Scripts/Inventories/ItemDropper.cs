@@ -19,11 +19,24 @@ namespace GameDevTV.Inventories
         /// Create a pickup at the current position.
         /// </summary>
         /// <param name="item">The item type for the pickup.</param>
-        /// <param name="number">The number of items contained in the pickup.</param>
+        /// <param name="number">
+        /// The number of items contained in the pickup. Only used if the item
+        /// is stackable.
+        /// </param>
         public void DropItem(InventoryItem item, int number)
         {
             var spawnLocation = transform.position;
             SpawnPickup(item, spawnLocation, number);
+        }
+
+        /// <summary>
+        /// Create a pickup at the current position.
+        /// </summary>
+        /// <param name="item">The item type for the pickup.</param>
+        public void DropItem(InventoryItem item)
+        {
+            var spawnLocation = transform.position;
+            SpawnPickup(item, spawnLocation, 1);
         }
 
         // PRIVATE
