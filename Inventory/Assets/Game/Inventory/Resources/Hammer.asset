@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f20eb1792e8048a46bf5c7c520a3ea3b, type: 3}
-  m_Name: Dagger
+  m_Name: Hammer
   m_EditorClassIdentifier: 
-  itemID: 1ca8bcb6-3995-44fb-97a9-15c60fe159e9
-  displayName: Dagger
-  description: Stab your enemies in the back, like the coward you are!
-  icon: {fileID: 21300000, guid: d19901b0ee3c38743a7d383bd484b0b5, type: 3}
+  itemID: 67020d60-7058-4bba-a865-8a4d1009c5bc
+  displayName: Hammer
+  description: Smash your enemies to pieces! It's heavy and blunt.
+  icon: {fileID: 21300000, guid: ec22508be0cdfba4abbaeb770bef08aa, type: 3}
   pickup: {fileID: 6494234044896430859, guid: ab73185f2dadf4445ae07e78eb669c1f, type: 3}
   stackable: 0
   allowedEquipLocation: 5
