@@ -80,12 +80,9 @@ namespace GameDevTV.Core.UI.Dragging
         {
             if (eventData.pointerEnter)
             {
-                var container = eventData.pointerEnter.GetComponent<IDragDestination<T>>();
+                var container = eventData.pointerEnter.GetComponentInParent<IDragDestination<T>>();
 
-                if (container != null) 
-                {
-                    return container;
-                }
+                return container;
             }
             return null;
         }
