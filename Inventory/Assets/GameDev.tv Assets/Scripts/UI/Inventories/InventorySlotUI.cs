@@ -6,7 +6,7 @@ using GameDevTV.Core.UI.Dragging;
 
 namespace GameDevTV.UI.Inventories
 {
-    public class InventorySlotUI : MonoBehaviour, IDragContainer<InventoryItem>
+    public class InventorySlotUI : MonoBehaviour, IItemHolder, IDragContainer<InventoryItem>
     {
         // CONFIG DATA
         [SerializeField] InventoryItemIcon icon = null;
