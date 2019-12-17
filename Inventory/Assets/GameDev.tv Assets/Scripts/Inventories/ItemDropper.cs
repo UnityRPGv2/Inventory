@@ -25,8 +25,7 @@ namespace GameDevTV.Inventories
         /// </param>
         public void DropItem(InventoryItem item, int number)
         {
-            var spawnLocation = transform.position;
-            SpawnPickup(item, spawnLocation, number);
+            SpawnPickup(item, GetDropLocation(), number);
         }
 
         /// <summary>
@@ -35,13 +34,23 @@ namespace GameDevTV.Inventories
         /// <param name="item">The item type for the pickup.</param>
         public void DropItem(InventoryItem item)
         {
-            var spawnLocation = transform.position;
-            SpawnPickup(item, spawnLocation, 1);
+            SpawnPickup(item, GetDropLocation(), 1);
+        }
+
+        // PROTECTED
+
+        /// <summary>
+        /// Override to set a custom method for locating a drop.
+        /// </summary>
+        /// <returns>The location the drop should be spawned.</returns>
+        protected virtual Vector3 GetDropLocation()
+        {
+            return transform.position;
         }
 
         // PRIVATE
 
-        private void SpawnPickup(InventoryItem item, Vector3 spawnLocation, int number)
+        public void SpawnPickup(InventoryItem item, Vector3 spawnLocation, int number)
         {
             var pickup = item.SpawnPickup(spawnLocation, number);
             droppedItems.Add(pickup);
