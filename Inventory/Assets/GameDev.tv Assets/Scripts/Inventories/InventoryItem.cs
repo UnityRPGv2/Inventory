@@ -23,6 +23,8 @@ namespace GameDevTV.Inventories
         [SerializeField][TextArea] string description = null;
         [Tooltip("The UI icon to represent this item in the inventory.")]
         [SerializeField] Sprite icon = null;
+        [Tooltip("The prefab that should be spawned when this item is dropped.")]
+        [SerializeField] Pickup pickup = null;
         [Tooltip("If true, multiple items of this type can be stacked in the same inventory slot.")]
         [SerializeField] bool stackable = false;
 
@@ -62,6 +64,19 @@ namespace GameDevTV.Inventories
             return itemLookupCache[itemID];
         }
         
+        /// <summary>
+        /// Spawn the pickup gameobject into the world.
+        /// </summary>
+        /// <param name="position">Where to spawn the pickup.</param>
+        /// <returns>Reference to the pickup object spawned.</returns>
+        public Pickup SpawnPickup(Vector3 position)
+        {
+            var pickup = Instantiate(this.pickup);
+            pickup.transform.position = position;
+            pickup.Setup(this);
+            return pickup;
+        }
+
         public Sprite GetIcon()
         {
             return icon;
