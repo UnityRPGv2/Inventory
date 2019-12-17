@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1523570855728752338}
   - component: {fileID: 1525608778226075600}
   - component: {fileID: 1703484757560212284}
+  - component: {fileID: 9198672312928698095}
   m_Layer: 5
   m_Name: InventorySlot
   m_TagString: Untagged
@@ -74,6 +75,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &9198672312928698095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602997939324067808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: caa4eeaa799d9a0418f7d124a459c437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 6742360680212600217}
 --- !u!1001 &3738852935408870244
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -199,3 +213,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 3738852935408870244}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6742360680212600217 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7958634321023792893, guid: 1973af7fc3e1d2b428983f58906580be,
+    type: 3}
+  m_PrefabInstance: {fileID: 3738852935408870244}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 493934aefc2d7c9469174527fc9bf167, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
