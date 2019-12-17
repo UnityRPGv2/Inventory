@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GameDevTV.Inventories;
 using TMPro;
 
 namespace GameDevTV.UI.Inventories
@@ -15,7 +16,7 @@ namespace GameDevTV.UI.Inventories
     {
         // PUBLIC
 
-        public void SetItem(Sprite item)
+        public void SetItem(InventoryItem item)
         {
             var iconImage = GetComponent<Image>();
             if (item == null)
@@ -25,18 +26,8 @@ namespace GameDevTV.UI.Inventories
             else
             {
                 iconImage.enabled = true;
-                iconImage.sprite = item;
+                iconImage.sprite = item.GetIcon();
             }
-        }
-
-        public Sprite GetItem()
-        {
-            var iconImage = GetComponent<Image>();
-            if (!iconImage.enabled)
-            {
-                return null;
-            }
-            return iconImage.sprite;
         }
     }
 }
