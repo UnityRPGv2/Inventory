@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 6393032711310101895}
   - component: {fileID: 6997811445119991105}
   - component: {fileID: 6494234044896430859}
-  - component: {fileID: 6871441180857157232}
+  - component: {fileID: 5992261590818854500}
+  - component: {fileID: 5753047547989989523}
   m_Layer: 0
   m_Name: Pickup
   m_TagString: Untagged
@@ -42,7 +43,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1222577395524571727}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
@@ -59,7 +60,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91f208ba0dbe65d478b628ca24b59c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6871441180857157232
+--- !u!114 &5992261590818854500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222577395524571727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3aa56a328e3ab4b8713bc132ce9980, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5753047547989989523
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
