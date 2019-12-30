@@ -3,6 +3,7 @@ using UnityEngine;
 using System;
 using UnityEngine.EventSystems;
 using UnityEngine.AI;
+using GameDevTV.Inventories;
 
 namespace InventoryExample.Control
 {
@@ -24,6 +25,11 @@ namespace InventoryExample.Control
 
         private void Update()
         {
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                GetComponent<ItemDropper>().DropItem(InventoryItem.GetFromID("0aa7c8b8-4796-42aa-89d0-9d100ea67d7b"));
+            }
+
             if (Input.GetMouseButtonUp(0))
             {
                 movementStarted = false;
