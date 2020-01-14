@@ -17,7 +17,13 @@ namespace GameDevTV.Inventories
         [SerializeField] int inventorySize = 16;
 
         // STATE
-        InventoryItem[] slots;
+        InventorySlot[] slots;
+
+        public struct InventorySlot
+        {
+            public InventoryItem item;
+            public int number;
+        }
 
         // PUBLIC
 
@@ -56,7 +62,7 @@ namespace GameDevTV.Inventories
         /// </summary>
         /// <param name="item">The item to add.</param>
         /// <returns>Whether or not the item could be added.</returns>
-        public bool AddToFirstEmptySlot(InventoryItem item)
+        public bool AddToFirstEmptySlot(InventoryItem item, int number)
         {
             int i = FindSlot(item);
 
@@ -65,7 +71,8 @@ namespace GameDevTV.Inventories
                 return false;
             }
 
-            slots[i] = item;
+            // TODO
+            // slots[i] = item;
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -80,7 +87,7 @@ namespace GameDevTV.Inventories
         {
             for (int i = 0; i < slots.Length; i++)
             {
-                if (object.ReferenceEquals(slots[i], item))
+                if (object.ReferenceEquals(slots[i].item, item))
                 {
                     return true;
                 }
@@ -93,15 +100,16 @@ namespace GameDevTV.Inventories
         /// </summary>
         public InventoryItem GetItemInSlot(int slot)
         {
-            return slots[slot];
+            return slots[slot].item;
         }
 
         /// <summary>
         /// Remove the item from the given slot.
         /// </summary>
-        public void RemoveFromSlot(int slot)
+        public void RemoveFromSlot(int slot, int number)
         {
-            slots[slot] = null;
+            slots[slot].item = null;
+            // TODO
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -116,14 +124,15 @@ namespace GameDevTV.Inventories
         /// <param name="slot">The slot to attempt to add to.</param>
         /// <param name="item">The item type to add.</param>
         /// <returns>True if the item was added anywhere in the inventory.</returns>
-        public bool AddItemToSlot(int slot, InventoryItem item)
+        public bool AddItemToSlot(int slot, InventoryItem item, int number)
         {
-            if (slots[slot] != null)
+            if (slots[slot].item != null)
             {
-                return AddToFirstEmptySlot(item); ;
+                return AddToFirstEmptySlot(item, number); ;
             }
 
-            slots[slot] = item;
+            // slots[slot] = item;
+            // TODO
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -135,7 +144,7 @@ namespace GameDevTV.Inventories
 
         private void Awake()
         {
-            slots = new InventoryItem[inventorySize];
+            slots = new InventorySlot[inventorySize];
         }
 
         /// <summary>
@@ -155,7 +164,7 @@ namespace GameDevTV.Inventories
         {
             for (int i = 0; i < slots.Length; i++)
             {
-                if (slots[i] == null)
+                if (slots[i].item == null)
                 {
                     return i;
                 }
@@ -168,9 +177,10 @@ namespace GameDevTV.Inventories
             var slotStrings = new string[inventorySize];
             for (int i = 0; i < inventorySize; i++)
             {
-                if (slots[i] != null)
+                if (slots[i].item != null)
                 {
-                    slotStrings[i] = slots[i].GetItemID();
+                    slotStrings[i] = slots[i].item.GetItemID();
+                    // TODO
                 }
             }
             return slotStrings;
@@ -181,7 +191,8 @@ namespace GameDevTV.Inventories
             var slotStrings = (string[])state;
             for (int i = 0; i < inventorySize; i++)
             {
-                slots[i] = InventoryItem.GetFromID(slotStrings[i]);
+                slots[i].item = InventoryItem.GetFromID(slotStrings[i]);
+                // TODO
             }
             if (inventoryUpdated != null)
             {
