@@ -22,7 +22,7 @@ namespace GameDevTV.UI.Inventories
         {
             this.inventory = inventory;
             this.index = index;
-            icon.SetItem(inventory.GetItemInSlot(index));
+            icon.SetItem(inventory.GetItemInSlot(index), inventory.GetNumberInSlot(index));
         }
 
         public int MaxAcceptable(InventoryItem item)

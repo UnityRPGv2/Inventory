@@ -73,7 +73,6 @@ namespace GameDevTV.Inventories
 
             slots[i].item = item;
             slots[i].number += number;
-            print(slots[i].number);
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -102,6 +101,11 @@ namespace GameDevTV.Inventories
         public InventoryItem GetItemInSlot(int slot)
         {
             return slots[slot].item;
+        }
+
+        public int GetNumberInSlot(int index)
+        {
+            return slots[index].number;
         }
 
         /// <summary>
