@@ -213,27 +213,34 @@ namespace GameDevTV.Inventories
             return -1;
         }
 
+        [System.Serializable]
+        private struct InventorySlotRecord
+        {
+            public string itemID;
+            public int number;
+        }
+
         object ISaveable.CaptureState()
         {
-            var slotStrings = new string[inventorySize];
+            var slotRecords = new InventorySlotRecord[inventorySize];
             for (int i = 0; i < inventorySize; i++)
             {
                 if (slots[i].item != null)
                 {
-                    slotStrings[i] = slots[i].item.GetItemID();
-                    // TODO
+                    slotRecords[i].itemID = slots[i].item.GetItemID();
+                    slotRecords[i].number = slots[i].number;
                 }
             }
-            return slotStrings;
+            return slotRecords;
         }
 
         void ISaveable.RestoreState(object state)
         {
-            var slotStrings = (string[])state;
+            var slotRecords = (InventorySlotRecord[])state;
             for (int i = 0; i < inventorySize; i++)
             {
-                slots[i].item = InventoryItem.GetFromID(slotStrings[i]);
-                // TODO
+                slots[i].item = InventoryItem.GetFromID(slotRecords[i].itemID);
+                slots[i].number = slotRecords[i].number;
             }
             if (inventoryUpdated != null)
             {
