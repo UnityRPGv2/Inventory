@@ -71,8 +71,9 @@ namespace GameDevTV.Inventories
                 return false;
             }
 
-            // TODO
-            // slots[i] = item;
+            slots[i].item = item;
+            slots[i].number += number;
+            print(slots[i].number);
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -108,8 +109,12 @@ namespace GameDevTV.Inventories
         /// </summary>
         public void RemoveFromSlot(int slot, int number)
         {
-            slots[slot].item = null;
-            // TODO
+            slots[slot].number -= number;
+            if (slots[slot].number <= 0)
+            {
+                slots[slot].number = 0;
+                slots[slot].item = null;
+            }
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
@@ -131,8 +136,8 @@ namespace GameDevTV.Inventories
                 return AddToFirstEmptySlot(item, number); ;
             }
 
-            // slots[slot] = item;
-            // TODO
+            slots[slot].item = item;
+            slots[slot].number += number;
             if (inventoryUpdated != null)
             {
                 inventoryUpdated();
