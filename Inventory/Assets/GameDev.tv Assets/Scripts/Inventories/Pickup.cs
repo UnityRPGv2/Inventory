@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace GameDevTV.Inventories
 {
@@ -38,6 +39,11 @@ namespace GameDevTV.Inventories
         public InventoryItem GetItem()
         {
             return item;
+        }
+
+        public int GetNumber()
+        {
+            return number;
         }
 
         public void PickupItem()

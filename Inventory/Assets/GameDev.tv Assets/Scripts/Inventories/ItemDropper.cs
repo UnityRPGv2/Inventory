@@ -48,6 +48,7 @@ namespace GameDevTV.Inventories
         {
             public string itemID;
             public SerializableVector3 position;
+            public int number;
         }
 
         object ISaveable.CaptureState()
@@ -58,6 +59,7 @@ namespace GameDevTV.Inventories
             {
                 droppedItemsList[i].itemID = droppedItems[i].GetItem().GetItemID();
                 droppedItemsList[i].position = new SerializableVector3(droppedItems[i].transform.position);
+                droppedItemsList[i].number = droppedItems[i].GetNumber();
             }
             return droppedItemsList;
         }
@@ -69,8 +71,8 @@ namespace GameDevTV.Inventories
             {
                 var pickupItem = InventoryItem.GetFromID(item.itemID);
                 Vector3 position = item.position.ToVector();
-                // TODO
-                SpawnPickup(pickupItem, 1, position);
+                int number = item.number;
+                SpawnPickup(pickupItem, number, position);
             }
         }
 

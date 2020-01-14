@@ -46,7 +46,7 @@ namespace GameDevTV.UI.Inventories
 
         public int GetNumber()
         {
-            return 1;
+            return inventory.GetNumberInSlot(index);
         }
 
         public void RemoveItems(int number)
