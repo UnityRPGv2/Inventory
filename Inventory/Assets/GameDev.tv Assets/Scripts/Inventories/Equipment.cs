@@ -64,6 +64,14 @@ namespace GameDevTV.Inventories
             }
         }
 
+        /// <summary>
+        /// Enumerate through all the slots that currently contain items.
+        /// </summary>
+        public IEnumerable<EquipLocation> GetAllPopulatedSlots()
+        {
+            return equippedItems.Keys;
+        }
+
         // PRIVATE
 
         object ISaveable.CaptureState()
